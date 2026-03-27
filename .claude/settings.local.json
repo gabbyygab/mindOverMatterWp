@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(curl -s \"https://api.github.com/repos/gabbygab/mindovermatterWP/releases/latest\")"
+    ]
+  }
+}
