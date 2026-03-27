@@ -202,7 +202,7 @@ export default function App() {
         const apk = data.assets?.find(a => a.name.endsWith('.apk'))
         if (apk) {
           setDownloadUrl(apk.browser_download_url)
-          setDownloadCount(apk.download_count.toLocaleString())
+          setDownloadCount(apk.download_count > 0 ? apk.download_count.toLocaleString() : '—')
           const mb = (apk.size / (1024 * 1024)).toFixed(0)
           setFileSize(`~${mb} MB`)
         }
