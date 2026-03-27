@@ -107,8 +107,8 @@ function Section({ id, children }) {
 // ─── SECTION TITLE ────────────────────────────────────────────────────────
 function SectionTitle({ color, accent, children }) {
   return (
-    <h2 className={`font-pixel ${color} tracking-widest text-center mb-8`}
-        style={{ fontSize: 'clamp(12px, 3.5vw, 18px)', textShadow: `0 0 20px ${accent}` }}>
+    <h2 className={`font-pixel ${color} tracking-widest text-center mb-5 sm:mb-8`}
+        style={{ fontSize: 'clamp(10px, 3vw, 18px)', textShadow: `0 0 20px ${accent}` }}>
       {children}
     </h2>
   )
@@ -120,7 +120,7 @@ function Panel({ accent, children, className = '' }) {
     <div className={`bg-[#0C0C1A] border border-gray-800 relative ${className}`}>
       <div className="absolute top-0 left-0 right-0 h-[3px] z-10"
            style={{ background: accent, boxShadow: `0 0 10px ${accent}` }} />
-      <div className="p-5 pt-6">
+      <div className="p-3 pt-5 sm:p-5 sm:pt-6">
         {children}
       </div>
     </div>
@@ -130,11 +130,11 @@ function Panel({ accent, children, className = '' }) {
 // ─── STAT BAR ─────────────────────────────────────────────────────────────
 function StatBar({ label, value, accent, bgClass }) {
   return (
-    <div className="flex items-center gap-2">
-      <span className="font-pixel text-gray-600 w-16 shrink-0" style={{ fontSize: '7px' }}>
+    <div className="flex items-center gap-1.5 sm:gap-2">
+      <span className="font-pixel text-gray-600 w-14 sm:w-16 shrink-0" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>
         {label.toUpperCase()}
       </span>
-      <div className="flex-1 h-2 bg-white/5 border border-white/10 overflow-hidden">
+      <div className="flex-1 h-1.5 sm:h-2 bg-white/5 border border-white/10 overflow-hidden">
         <div
           className={`h-full ${bgClass} transition-all duration-1000`}
           style={{ width: `${value}%`, boxShadow: `0 0 6px ${accent}` }}
@@ -154,26 +154,26 @@ function CharCard({ s }) {
            style={{ aspectRatio: '3/4' }}>
         <img src={s.img} alt={s.name} className="w-full h-full object-cover object-top" />
       </div>
-      <div className="p-4">
+      <div className="p-3 sm:p-4">
         <p className={`font-pixel ${s.accentClass} mb-1`}
-           style={{ fontSize: '11px', textShadow: `0 0 8px ${s.accent}` }}>
+           style={{ fontSize: 'clamp(9px, 2.5vw, 11px)', textShadow: `0 0 8px ${s.accent}` }}>
           {s.name}
         </p>
-        <p className="font-pixel text-white/30 tracking-widest mb-3" style={{ fontSize: '7px' }}>
+        <p className="font-pixel text-white/30 tracking-widest mb-2 sm:mb-3" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>
           {s.type}
         </p>
-        <p className="font-vt text-lg text-gray-400 leading-relaxed mb-3">{s.bio}</p>
-        <div className="flex flex-col gap-2 mb-3">
+        <p className="font-vt text-base sm:text-lg text-gray-400 leading-relaxed mb-2 sm:mb-3">{s.bio}</p>
+        <div className="flex flex-col gap-1.5 sm:gap-2 mb-2 sm:mb-3">
           {statLabels.map(label => (
             <StatBar key={label} label={label} value={s.stats[label]} accent={s.accent} bgClass={s.bgClass} />
           ))}
         </div>
-        <div className={`border-l-2 ${s.borderClass} pl-3 py-1`} style={{ background: `${s.accent}10` }}>
+        <div className={`border-l-2 ${s.borderClass} pl-2 sm:pl-3 py-1`} style={{ background: `${s.accent}10` }}>
           <p className={`font-pixel ${s.accentClass} mb-1`}
-             style={{ fontSize: '7px', textShadow: `0 0 6px ${s.accent}` }}>
+             style={{ fontSize: 'clamp(6px, 1.5vw, 7px)', textShadow: `0 0 6px ${s.accent}` }}>
             ⚡ SIGNATURE MOVE
           </p>
-          <p className="font-vt text-lg text-white">{s.move}</p>
+          <p className="font-vt text-base sm:text-lg text-white">{s.move}</p>
         </div>
       </div>
     </div>
@@ -233,14 +233,14 @@ export default function App() {
 
       {/* ══════════════ STICKY NAV ══════════════ */}
       <nav className="sticky top-0 z-30 bg-[#07070F]/90 backdrop-blur border-b border-gray-800/60">
-        <div className="max-w-5xl mx-auto flex justify-center gap-1 sm:gap-3 px-2 py-2 flex-wrap">
+        <div className="max-w-5xl mx-auto flex justify-center gap-[3px] sm:gap-2 md:gap-3 px-1 sm:px-2 py-1.5 sm:py-2 flex-wrap">
           {NAV_ITEMS.map(({ id, label }) => (
             <button
               key={id}
               onClick={() => scrollTo(id)}
-              className="font-pixel tracking-wide transition-all duration-100 px-3 py-2 border"
+              className="font-pixel tracking-wide transition-all duration-100 px-2 py-1.5 sm:px-3 sm:py-2 border"
               style={{
-                fontSize: '8px',
+                fontSize: 'clamp(6px, 1.8vw, 8px)',
                 background: activeNav === id ? '#FFE600' : 'transparent',
                 color: activeNav === id ? '#000' : '#6b7280',
                 borderColor: activeNav === id ? '#FFE600' : '#374151',
@@ -255,21 +255,21 @@ export default function App() {
 
       {/* ══════════════ HERO SECTION ══════════════ */}
       <Section id="hero">
-        <div className="relative min-h-[90vh] flex flex-col items-center justify-center px-4 overflow-hidden">
+        <div className="relative min-h-[85vh] sm:min-h-[90vh] flex flex-col items-center justify-center px-3 sm:px-4 overflow-hidden">
           {/* background glow effects */}
           <div className="absolute inset-0 pointer-events-none"
                style={{ background: 'radial-gradient(ellipse at 30% 20%, rgba(255,45,85,0.12) 0%, transparent 60%), radial-gradient(ellipse at 70% 80%, rgba(0,245,255,0.08) 0%, transparent 50%)' }} />
 
           {/* blinking insert coin */}
-          <p className="font-pixel text-yellow-400 tracking-widest mb-6"
-             style={{ fontSize: '9px', animation: 'blink 1s step-end infinite' }}>
+          <p className="font-pixel text-yellow-400 tracking-widest mb-4 sm:mb-6"
+             style={{ fontSize: 'clamp(7px, 2vw, 9px)', animation: 'blink 1s step-end infinite' }}>
             ★ INSERT COIN TO CONTINUE ★
           </p>
 
           {/* poster */}
-          <div className="relative border-2 border-yellow-400 overflow-hidden mb-8"
+          <div className="relative border-2 border-yellow-400 overflow-hidden mb-6 sm:mb-8"
                style={{
-                 width: 'min(280px, 70vw)',
+                 width: 'min(280px, 65vw)',
                  boxShadow: '0 0 40px rgba(255,230,0,0.3), 0 0 80px rgba(255,45,85,0.15)',
                }}>
             <div className="absolute top-0 left-0 right-0 h-[3px] z-10"
@@ -282,24 +282,24 @@ export default function App() {
               style={{ fontSize: 'clamp(22px, 7vw, 56px)', textShadow: '4px 4px 0 #FF2D55, 0 0 40px rgba(255,230,0,0.8)' }}>
             Mind Over Matter
           </h1>
-          <p className="font-pixel text-cyan-400 tracking-[4px] mt-4 text-center"
-             style={{ fontSize: '10px', textShadow: '0 0 12px #00F5FF' }}>
+          <p className="font-pixel text-cyan-400 tracking-[2px] sm:tracking-[4px] mt-3 sm:mt-4 text-center"
+             style={{ fontSize: 'clamp(7px, 2.2vw, 10px)', textShadow: '0 0 12px #00F5FF' }}>
             WHERE GENIUS BECOMES POWER
           </p>
 
           {/* CTA buttons */}
-          <div className="flex gap-3 mt-8 flex-wrap justify-center">
+          <div className="flex gap-2 sm:gap-3 mt-6 sm:mt-8 flex-wrap justify-center">
             <button
               onClick={() => scrollTo('download')}
-              className="font-pixel tracking-wide px-6 py-3 border-2 border-yellow-400 bg-yellow-400 text-black transition-all hover:scale-105"
-              style={{ fontSize: '9px', boxShadow: '0 0 20px rgba(255,230,0,0.5)' }}
+              className="font-pixel tracking-wide px-4 py-2.5 sm:px-6 sm:py-3 border-2 border-yellow-400 bg-yellow-400 text-black transition-all hover:scale-105"
+              style={{ fontSize: 'clamp(7px, 2vw, 9px)', boxShadow: '0 0 20px rgba(255,230,0,0.5)' }}
             >
               ▼ DOWNLOAD APK
             </button>
             <button
               onClick={() => scrollTo('characters')}
-              className="font-pixel tracking-wide px-6 py-3 border-2 border-cyan-400 text-cyan-400 transition-all hover:bg-cyan-400/10"
-              style={{ fontSize: '9px' }}
+              className="font-pixel tracking-wide px-4 py-2.5 sm:px-6 sm:py-3 border-2 border-cyan-400 text-cyan-400 transition-all hover:bg-cyan-400/10"
+              style={{ fontSize: 'clamp(7px, 2vw, 9px)' }}
             >
               VIEW FIGHTERS
             </button>
@@ -316,15 +316,15 @@ export default function App() {
       </Section>
 
       {/* ── MARQUEE ── */}
-      <div className="overflow-hidden bg-rose-500 py-[6px]">
+      <div className="overflow-hidden bg-rose-500 py-1 sm:py-[6px]">
         <span className="font-pixel text-black tracking-widest whitespace-nowrap inline-block"
-              style={{ fontSize: '8px', animation: 'marquee 22s linear infinite' }}>
+              style={{ fontSize: 'clamp(6px, 1.8vw, 8px)', animation: 'marquee 22s linear infinite' }}>
           ★ E=MC² ★ PLAYER 1 WINS ★ THEORY OF RELATIVITY ACTIVATED ★ TESLA COIL SURGE ★ FLAWLESS VICTORY ★ NEW CHALLENGER ★ ROUND 1 FIGHT ★ K.O. ★ GRAVITY SMASH ★ QUANTUM COMBO ★ Mind Over Matter ★
         </span>
       </div>
 
       {/* ══════════════ CONTENT ══════════════ */}
-      <div className="max-w-5xl mx-auto px-4 py-12 space-y-20">
+      <div className="max-w-5xl mx-auto px-3 sm:px-4 py-8 sm:py-12 space-y-12 sm:space-y-20">
 
         {/* ── OVERVIEW ── */}
         <Section id="overview">
@@ -333,7 +333,7 @@ export default function App() {
           </SectionTitle>
 
           <Panel accent="#00F5FF" className="mb-6">
-            <p className="font-vt text-xl text-gray-300 leading-relaxed">
+            <p className="font-vt text-lg sm:text-xl text-gray-300 leading-relaxed">
               Welcome to <span className="text-yellow-400">Mind Over Matter</span> — the fighting game where
               history's greatest scientific minds settle their rivalries in the arena. Einstein bends
               space-time, Tesla unleashes electrical storms, and Newton commands the very force of gravity.
@@ -346,16 +346,16 @@ export default function App() {
 
           {/* stats grid */}
           <Panel accent="#FFE600" className="mb-6">
-            <p className="font-pixel text-yellow-400 tracking-widest mb-4"
-               style={{ fontSize: '9px', textShadow: '0 0 8px rgba(255,230,0,0.6)' }}>
+            <p className="font-pixel text-yellow-400 tracking-widest mb-3 sm:mb-4"
+               style={{ fontSize: 'clamp(7px, 2vw, 9px)', textShadow: '0 0 8px rgba(255,230,0,0.6)' }}>
               GAME STATS
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3">
               {[['6', 'SCIENTISTS'], ['8', 'ARENAS'], ['2P', 'VS MODE'], ['60', 'FPS'], ['LAN', 'MULTIPLAYER']].map(([val, label]) => (
-                <div key={label} className="border border-cyan-400/20 bg-cyan-400/5 p-3 text-center">
-                  <span className="font-pixel text-yellow-400 text-lg block"
+                <div key={label} className="border border-cyan-400/20 bg-cyan-400/5 p-2 sm:p-3 text-center">
+                  <span className="font-pixel text-yellow-400 text-base sm:text-lg block"
                         style={{ textShadow: '0 0 8px rgba(255,230,0,0.5)' }}>{val}</span>
-                  <span className="font-vt text-gray-400 text-base tracking-wider mt-1 block">{label}</span>
+                  <span className="font-vt text-gray-400 text-sm sm:text-base tracking-wider mt-1 block">{label}</span>
                 </div>
               ))}
             </div>
@@ -363,11 +363,11 @@ export default function App() {
 
           {/* screenshots */}
           <Panel accent="#39FF14">
-            <p className="font-pixel text-green-400 tracking-widest mb-4"
-               style={{ fontSize: '9px', textShadow: '0 0 8px #39FF14' }}>
+            <p className="font-pixel text-green-400 tracking-widest mb-3 sm:mb-4"
+               style={{ fontSize: 'clamp(7px, 2vw, 9px)', textShadow: '0 0 8px #39FF14' }}>
               SCREENSHOTS
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 sm:gap-2">
               {[1,2,3,4,5,6].map(n => (
                 <div key={n}
                      className="aspect-video border border-dashed border-yellow-400/20 hover:border-yellow-400/50 flex items-center justify-center transition-colors">
@@ -385,11 +385,11 @@ export default function App() {
           <SectionTitle color="text-rose-500" accent="#FF2D55">
             ★ CHOOSE YOUR SCIENTIST ★
           </SectionTitle>
-          <p className="font-pixel text-cyan-400 tracking-[3px] text-center -mt-4 mb-8"
-             style={{ fontSize: '8px', textShadow: '0 0 8px #00F5FF' }}>
+          <p className="font-pixel text-cyan-400 tracking-[2px] sm:tracking-[3px] text-center -mt-3 sm:-mt-4 mb-6 sm:mb-8"
+             style={{ fontSize: 'clamp(6px, 1.8vw, 8px)', textShadow: '0 0 8px #00F5FF' }}>
             6 GENIUSES · 1 ARENA · NO RULES
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {scientists.map(s => <CharCard key={s.name} s={s} />)}
           </div>
           <p className="font-pixel text-gray-800 tracking-widest text-center mt-8"
@@ -407,40 +407,40 @@ export default function App() {
           {/* Mobile Requirements */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <Panel accent="#39FF14">
-              <p className="font-pixel text-green-400 tracking-widest mb-4"
-                 style={{ fontSize: '9px', textShadow: '0 0 8px #39FF14' }}>
+              <p className="font-pixel text-green-400 tracking-widest mb-3 sm:mb-4"
+                 style={{ fontSize: 'clamp(7px, 2vw, 9px)', textShadow: '0 0 8px #39FF14' }}>
                 ANDROID
               </p>
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 {[
                   ['OS', 'Android 7.1+ (API 25)'],
                   ['CPU', 'ARM64 · Vulkan'],
                   ['RAM', '3 GB+'],
                   ['DISPLAY', 'Landscape · 400 × 300 min'],
                 ].map(([label, val]) => (
-                  <div key={label} className="flex items-start gap-2">
-                    <span className="font-pixel text-green-400 shrink-0 w-16" style={{ fontSize: '7px' }}>{label}</span>
-                    <span className="font-vt text-gray-300 text-lg leading-tight">{val}</span>
+                  <div key={label} className="flex items-start gap-1.5 sm:gap-2">
+                    <span className="font-pixel text-green-400 shrink-0 w-14 sm:w-16" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>{label}</span>
+                    <span className="font-vt text-gray-300 text-base sm:text-lg leading-tight">{val}</span>
                   </div>
                 ))}
               </div>
             </Panel>
 
             <Panel accent="#BF00FF">
-              <p className="font-pixel text-purple-500 tracking-widest mb-4"
-                 style={{ fontSize: '9px', textShadow: '0 0 8px #BF00FF' }}>
+              <p className="font-pixel text-purple-500 tracking-widest mb-3 sm:mb-4"
+                 style={{ fontSize: 'clamp(7px, 2vw, 9px)', textShadow: '0 0 8px #BF00FF' }}>
                 iOS
               </p>
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 {[
                   ['OS', 'iOS 15.0+'],
                   ['DEVICE', 'iPhone / iPad'],
                   ['GPU', 'Metal-capable'],
                   ['DISPLAY', 'Landscape · Auto-rotation'],
                 ].map(([label, val]) => (
-                  <div key={label} className="flex items-start gap-2">
-                    <span className="font-pixel text-purple-500 shrink-0 w-16" style={{ fontSize: '7px' }}>{label}</span>
-                    <span className="font-vt text-gray-300 text-lg leading-tight">{val}</span>
+                  <div key={label} className="flex items-start gap-1.5 sm:gap-2">
+                    <span className="font-pixel text-purple-500 shrink-0 w-14 sm:w-16" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>{label}</span>
+                    <span className="font-vt text-gray-300 text-base sm:text-lg leading-tight">{val}</span>
                   </div>
                 ))}
               </div>
@@ -448,12 +448,12 @@ export default function App() {
           </div>
 
           {/* Input & Controls */}
-          <Panel accent="#FF2D55" className="mt-4">
-            <p className="font-pixel text-rose-500 tracking-widest mb-4"
-               style={{ fontSize: '9px', textShadow: '0 0 8px #FF2D55' }}>
+          <Panel accent="#FF2D55" className="mt-3 sm:mt-4">
+            <p className="font-pixel text-rose-500 tracking-widest mb-3 sm:mb-4"
+               style={{ fontSize: 'clamp(7px, 2vw, 9px)', textShadow: '0 0 8px #FF2D55' }}>
               CONTROLS · D-PAD
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
               {[
                 ['MOVE', 'D-Pad'],
                 ['ATTACK', 'Action Buttons'],
@@ -462,34 +462,34 @@ export default function App() {
                 ['SPECIAL', 'Signature Move Button'],
                 ['INTERACT', 'Hold Action Button'],
               ].map(([label, val]) => (
-                <div key={label} className="border border-rose-500/20 bg-rose-500/5 p-3">
-                  <span className="font-pixel text-rose-500 block mb-1" style={{ fontSize: '7px' }}>{label}</span>
-                  <span className="font-vt text-gray-300 text-lg">{val}</span>
+                <div key={label} className="border border-rose-500/20 bg-rose-500/5 p-2 sm:p-3">
+                  <span className="font-pixel text-rose-500 block mb-1" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>{label}</span>
+                  <span className="font-vt text-gray-300 text-base sm:text-lg">{val}</span>
                 </div>
               ))}
             </div>
           </Panel>
 
           {/* Multiplayer */}
-          <Panel accent="#FF8C00" className="mt-4">
-            <p className="font-pixel text-orange-500 tracking-widest mb-4"
-               style={{ fontSize: '9px', textShadow: '0 0 8px #FF8C00' }}>
+          <Panel accent="#FF8C00" className="mt-3 sm:mt-4">
+            <p className="font-pixel text-orange-500 tracking-widest mb-3 sm:mb-4"
+               style={{ fontSize: 'clamp(7px, 2vw, 9px)', textShadow: '0 0 8px #FF8C00' }}>
               MULTIPLAYER
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="border border-orange-500/20 bg-orange-500/5 p-4">
-                <span className="font-pixel text-orange-500 block mb-1" style={{ fontSize: '7px' }}>LAN · AVAILABLE NOW</span>
-                <span className="font-vt text-gray-300 text-lg">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+              <div className="border border-orange-500/20 bg-orange-500/5 p-3 sm:p-4">
+                <span className="font-pixel text-orange-500 block mb-1" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>LAN · AVAILABLE NOW</span>
+                <span className="font-vt text-gray-300 text-base sm:text-lg">
                   Play locally over your network — connect via LAN for low-latency head-to-head matches.
                 </span>
               </div>
-              <div className="border border-orange-500/20 bg-orange-500/5 p-4 relative overflow-hidden">
-                <div className="absolute top-2 right-2">
-                  <span className="font-pixel text-black bg-orange-500 px-2 py-[2px]"
-                        style={{ fontSize: '6px' }}>COMING SOON</span>
+              <div className="border border-orange-500/20 bg-orange-500/5 p-3 sm:p-4 relative overflow-hidden">
+                <div className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2">
+                  <span className="font-pixel text-black bg-orange-500 px-1.5 py-[2px] sm:px-2"
+                        style={{ fontSize: 'clamp(5px, 1.3vw, 6px)' }}>COMING SOON</span>
                 </div>
-                <span className="font-pixel text-orange-500 block mb-1" style={{ fontSize: '7px' }}>ONLINE · JOIN CODE</span>
-                <span className="font-vt text-gray-300 text-lg">
+                <span className="font-pixel text-orange-500 block mb-1" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>ONLINE · JOIN CODE</span>
+                <span className="font-vt text-gray-300 text-base sm:text-lg">
                   Internet multiplayer via join codes — share a code with friends to battle online from anywhere.
                 </span>
               </div>
@@ -497,7 +497,7 @@ export default function App() {
           </Panel>
 
           {/* Engine / Tech Bar */}
-          <div className="mt-4 flex justify-center gap-4 sm:gap-8 flex-wrap">
+          <div className="mt-3 sm:mt-4 grid grid-cols-2 sm:flex sm:justify-center gap-3 sm:gap-8">
             {[
               ['ENGINE', 'Unity 6.0'],
               ['PIPELINE', 'URP 2D'],
@@ -505,8 +505,8 @@ export default function App() {
               ['BACKEND', 'IL2CPP / Mono'],
             ].map(([label, val]) => (
               <div key={label} className="text-center">
-                <span className="font-pixel text-gray-600 block" style={{ fontSize: '7px' }}>{label}</span>
-                <span className="font-vt text-gray-400 text-lg">{val}</span>
+                <span className="font-pixel text-gray-600 block" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>{label}</span>
+                <span className="font-vt text-gray-400 text-base sm:text-lg">{val}</span>
               </div>
             ))}
           </div>
@@ -532,42 +532,42 @@ export default function App() {
                 href={downloadUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block font-pixel tracking-wide px-8 py-4 border-2 border-yellow-400 bg-yellow-400 text-black transition-all hover:scale-105 hover:bg-yellow-300"
-                style={{ fontSize: '12px', boxShadow: '0 0 30px rgba(255,230,0,0.5)' }}
+                className="inline-block font-pixel tracking-wide px-6 py-3 sm:px-8 sm:py-4 border-2 border-yellow-400 bg-yellow-400 text-black transition-all hover:scale-105 hover:bg-yellow-300"
+                style={{ fontSize: 'clamp(9px, 2.5vw, 12px)', boxShadow: '0 0 30px rgba(255,230,0,0.5)' }}
               >
                 ▼ DOWNLOAD NOW
               </a>
             </div>
 
             {/* file info */}
-            <div className="flex justify-center gap-4 sm:gap-8 flex-wrap mb-6">
+            <div className="flex justify-center gap-4 sm:gap-8 flex-wrap mb-4 sm:mb-6">
               <div className="text-center">
-                <p className="font-pixel text-gray-500" style={{ fontSize: '7px' }}>FILE SIZE</p>
-                <p className="font-vt text-xl text-white mt-1">{fileSize}</p>
+                <p className="font-pixel text-gray-500" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>FILE SIZE</p>
+                <p className="font-vt text-lg sm:text-xl text-white mt-1">{fileSize}</p>
               </div>
               <div className="text-center">
-                <p className="font-pixel text-gray-500" style={{ fontSize: '7px' }}>DOWNLOADS</p>
-                <p className="font-vt text-xl text-cyan-400 mt-1"
+                <p className="font-pixel text-gray-500" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>DOWNLOADS</p>
+                <p className="font-vt text-lg sm:text-xl text-cyan-400 mt-1"
                    style={{ textShadow: '0 0 8px #00F5FF' }}>
                   {downloadCount}
                 </p>
               </div>
               <div className="text-center">
-                <p className="font-pixel text-gray-500" style={{ fontSize: '7px' }}>PLATFORM</p>
-                <p className="font-vt text-xl text-white mt-1">ANDROID 7+</p>
+                <p className="font-pixel text-gray-500" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>PLATFORM</p>
+                <p className="font-vt text-lg sm:text-xl text-white mt-1">ANDROID 7.1+</p>
               </div>
             </div>
 
             {/* requirements */}
-            <div className="border-t border-gray-800 pt-4">
-              <p className="font-pixel text-gray-600 tracking-widest mb-3" style={{ fontSize: '7px' }}>
+            <div className="border-t border-gray-800 pt-3 sm:pt-4">
+              <p className="font-pixel text-gray-600 tracking-widest mb-2 sm:mb-3" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>
                 SYSTEM REQUIREMENTS
               </p>
-              <div className="flex justify-center gap-6 flex-wrap">
+              <div className="flex justify-center gap-4 sm:gap-6 flex-wrap">
                 {[['RAM', '3 GB+'], ['STORAGE', '2 GB'], ['OS', 'Android 7.1+']].map(([label, val]) => (
                   <div key={label} className="text-center">
-                    <span className="font-pixel text-gray-600 block" style={{ fontSize: '7px' }}>{label}</span>
-                    <span className="font-vt text-gray-400 text-lg">{val}</span>
+                    <span className="font-pixel text-gray-600 block" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>{label}</span>
+                    <span className="font-vt text-gray-400 text-base sm:text-lg">{val}</span>
                   </div>
                 ))}
               </div>
@@ -575,21 +575,21 @@ export default function App() {
           </Panel>
 
           {/* install instructions */}
-          <Panel accent="#00F5FF" className="mt-4">
-            <p className="font-pixel text-cyan-400 tracking-widest mb-4"
-               style={{ fontSize: '9px', textShadow: '0 0 8px #00F5FF' }}>
+          <Panel accent="#00F5FF" className="mt-3 sm:mt-4">
+            <p className="font-pixel text-cyan-400 tracking-widest mb-3 sm:mb-4"
+               style={{ fontSize: 'clamp(7px, 2vw, 9px)', textShadow: '0 0 8px #00F5FF' }}>
               HOW TO INSTALL
             </p>
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {[
                 ['01', 'Download the APK file using the button above'],
                 ['02', 'Open your file manager and locate the downloaded .apk'],
                 ['03', 'Tap the file — if prompted, enable "Install from unknown sources"'],
                 ['04', 'Wait for installation to complete, then open the game'],
               ].map(([num, text]) => (
-                <div key={num} className="flex gap-3 items-start">
-                  <span className="font-pixel text-yellow-400 shrink-0" style={{ fontSize: '10px' }}>{num}</span>
-                  <p className="font-vt text-lg text-gray-400">{text}</p>
+                <div key={num} className="flex gap-2 sm:gap-3 items-start">
+                  <span className="font-pixel text-yellow-400 shrink-0" style={{ fontSize: 'clamp(8px, 2.2vw, 10px)' }}>{num}</span>
+                  <p className="font-vt text-base sm:text-lg text-gray-400">{text}</p>
                 </div>
               ))}
             </div>
@@ -599,12 +599,12 @@ export default function App() {
       </div>
 
       {/* ══════════════ FOOTER ══════════════ */}
-      <footer className="text-center py-10 px-4 border-t border-gray-800 mt-4">
+      <footer className="text-center py-6 sm:py-10 px-3 sm:px-4 border-t border-gray-800 mt-4">
         <p className="font-pixel text-yellow-400 tracking-widest"
-           style={{ fontSize: '10px', textShadow: '0 0 8px rgba(255,230,0,0.4)' }}>
+           style={{ fontSize: 'clamp(8px, 2.2vw, 10px)', textShadow: '0 0 8px rgba(255,230,0,0.4)' }}>
           Mind Over Matter
         </p>
-        <p className="font-vt text-gray-700 text-base tracking-widest mt-1">
+        <p className="font-vt text-gray-700 text-sm sm:text-base tracking-widest mt-1">
           © 2025 YOUR STUDIO NAME · ALL RIGHTS RESERVED
         </p>
         <div className="flex justify-center gap-2 mt-3 text-lg">❤️ ❤️ ❤️</div>
