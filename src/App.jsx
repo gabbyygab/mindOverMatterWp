@@ -91,6 +91,7 @@ const NAV_ITEMS = [
   { id: 'hero', label: 'HOME' },
   { id: 'overview', label: 'OVERVIEW' },
   { id: 'characters', label: 'CHARACTERS' },
+  { id: 'specs', label: 'SPECS' },
   { id: 'download', label: 'DOWNLOAD' },
 ]
 
@@ -187,13 +188,13 @@ export default function App() {
   const [activeNav, setActiveNav] = useState('hero')
 
   // ── TODO: Replace these with real MediaFire API data ──
-  const [downloadUrl, setDownloadUrl] = useState('https://github.com/gabbygab/mindovermatterWP/releases')
+  const [downloadUrl, setDownloadUrl] = useState('https://github.com/gabbyygab/mindOverMatterWp/releases')
   const [downloadCount, setDownloadCount] = useState('—')
   const [fileSize, setFileSize] = useState('—')
   const [version, setVersion] = useState('v1.0.0')
 
   useEffect(() => {
-    fetch('https://api.github.com/repos/gabbygab/mindovermatterWP/releases/latest')
+    fetch('https://api.github.com/repos/gabbyygab/mindOverMatterWp/releases/latest')
       .then(res => res.ok ? res.json() : null)
       .then(data => {
         if (!data) return
@@ -350,7 +351,7 @@ export default function App() {
               GAME STATS
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {[['6', 'SCIENTISTS'], ['8', 'ARENAS'], ['2P', 'VS MODE'], ['60', 'FPS']].map(([val, label]) => (
+              {[['6', 'SCIENTISTS'], ['8', 'ARENAS'], ['2P', 'VS MODE'], ['60', 'FPS'], ['LAN', 'MULTIPLAYER']].map(([val, label]) => (
                 <div key={label} className="border border-cyan-400/20 bg-cyan-400/5 p-3 text-center">
                   <span className="font-pixel text-yellow-400 text-lg block"
                         style={{ textShadow: '0 0 8px rgba(255,230,0,0.5)' }}>{val}</span>
@@ -395,6 +396,120 @@ export default function App() {
              style={{ fontSize: '8px', animation: 'blink 1.5s step-end infinite' }}>
             MORE SCIENTISTS UNLOCKABLE IN STORY MODE
           </p>
+        </Section>
+
+        {/* ══════════════ SYSTEM REQUIREMENTS ══════════════ */}
+        <Section id="specs">
+          <SectionTitle color="text-green-400" accent="#39FF14">
+            ▸ SYSTEM REQUIREMENTS ◂
+          </SectionTitle>
+
+          {/* Mobile Requirements */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <Panel accent="#39FF14">
+              <p className="font-pixel text-green-400 tracking-widest mb-4"
+                 style={{ fontSize: '9px', textShadow: '0 0 8px #39FF14' }}>
+                ANDROID
+              </p>
+              <div className="space-y-3">
+                {[
+                  ['OS', 'Android 7.1+ (API 25)'],
+                  ['CPU', 'ARM64 · Vulkan'],
+                  ['RAM', '3 GB+'],
+                  ['DISPLAY', 'Landscape · 400 × 300 min'],
+                ].map(([label, val]) => (
+                  <div key={label} className="flex items-start gap-2">
+                    <span className="font-pixel text-green-400 shrink-0 w-16" style={{ fontSize: '7px' }}>{label}</span>
+                    <span className="font-vt text-gray-300 text-lg leading-tight">{val}</span>
+                  </div>
+                ))}
+              </div>
+            </Panel>
+
+            <Panel accent="#BF00FF">
+              <p className="font-pixel text-purple-500 tracking-widest mb-4"
+                 style={{ fontSize: '9px', textShadow: '0 0 8px #BF00FF' }}>
+                iOS
+              </p>
+              <div className="space-y-3">
+                {[
+                  ['OS', 'iOS 15.0+'],
+                  ['DEVICE', 'iPhone / iPad'],
+                  ['GPU', 'Metal-capable'],
+                  ['DISPLAY', 'Landscape · Auto-rotation'],
+                ].map(([label, val]) => (
+                  <div key={label} className="flex items-start gap-2">
+                    <span className="font-pixel text-purple-500 shrink-0 w-16" style={{ fontSize: '7px' }}>{label}</span>
+                    <span className="font-vt text-gray-300 text-lg leading-tight">{val}</span>
+                  </div>
+                ))}
+              </div>
+            </Panel>
+          </div>
+
+          {/* Input & Controls */}
+          <Panel accent="#FF2D55" className="mt-4">
+            <p className="font-pixel text-rose-500 tracking-widest mb-4"
+               style={{ fontSize: '9px', textShadow: '0 0 8px #FF2D55' }}>
+              CONTROLS · D-PAD
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {[
+                ['MOVE', 'D-Pad'],
+                ['ATTACK', 'Action Buttons'],
+                ['JUMP', 'D-Pad Up'],
+                ['CROUCH', 'D-Pad Down'],
+                ['SPECIAL', 'Signature Move Button'],
+                ['INTERACT', 'Hold Action Button'],
+              ].map(([label, val]) => (
+                <div key={label} className="border border-rose-500/20 bg-rose-500/5 p-3">
+                  <span className="font-pixel text-rose-500 block mb-1" style={{ fontSize: '7px' }}>{label}</span>
+                  <span className="font-vt text-gray-300 text-lg">{val}</span>
+                </div>
+              ))}
+            </div>
+          </Panel>
+
+          {/* Multiplayer */}
+          <Panel accent="#FF8C00" className="mt-4">
+            <p className="font-pixel text-orange-500 tracking-widest mb-4"
+               style={{ fontSize: '9px', textShadow: '0 0 8px #FF8C00' }}>
+              MULTIPLAYER
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="border border-orange-500/20 bg-orange-500/5 p-4">
+                <span className="font-pixel text-orange-500 block mb-1" style={{ fontSize: '7px' }}>LAN · AVAILABLE NOW</span>
+                <span className="font-vt text-gray-300 text-lg">
+                  Play locally over your network — connect via LAN for low-latency head-to-head matches.
+                </span>
+              </div>
+              <div className="border border-orange-500/20 bg-orange-500/5 p-4 relative overflow-hidden">
+                <div className="absolute top-2 right-2">
+                  <span className="font-pixel text-black bg-orange-500 px-2 py-[2px]"
+                        style={{ fontSize: '6px' }}>COMING SOON</span>
+                </div>
+                <span className="font-pixel text-orange-500 block mb-1" style={{ fontSize: '7px' }}>ONLINE · JOIN CODE</span>
+                <span className="font-vt text-gray-300 text-lg">
+                  Internet multiplayer via join codes — share a code with friends to battle online from anywhere.
+                </span>
+              </div>
+            </div>
+          </Panel>
+
+          {/* Engine / Tech Bar */}
+          <div className="mt-4 flex justify-center gap-4 sm:gap-8 flex-wrap">
+            {[
+              ['ENGINE', 'Unity 6.0'],
+              ['PIPELINE', 'URP 2D'],
+              ['INPUT', 'New Input System'],
+              ['BACKEND', 'IL2CPP / Mono'],
+            ].map(([label, val]) => (
+              <div key={label} className="text-center">
+                <span className="font-pixel text-gray-600 block" style={{ fontSize: '7px' }}>{label}</span>
+                <span className="font-vt text-gray-400 text-lg">{val}</span>
+              </div>
+            ))}
+          </div>
         </Section>
 
         {/* ══════════════ DOWNLOAD SECTION ══════════════ */}
@@ -449,7 +564,7 @@ export default function App() {
                 SYSTEM REQUIREMENTS
               </p>
               <div className="flex justify-center gap-6 flex-wrap">
-                {[['RAM', '2 GB+'], ['STORAGE', '100 MB'], ['OS', 'Android 7+']].map(([label, val]) => (
+                {[['RAM', '3 GB+'], ['STORAGE', '2 GB'], ['OS', 'Android 7.1+']].map(([label, val]) => (
                   <div key={label} className="text-center">
                     <span className="font-pixel text-gray-600 block" style={{ fontSize: '7px' }}>{label}</span>
                     <span className="font-vt text-gray-400 text-lg">{val}</span>
