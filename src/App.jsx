@@ -11,7 +11,7 @@ import oppenheimerImg  from './assets/Posters/oppenheimer.png'
 import ss1 from './assets/Screenshots/SSwebsiteMom.jpg'
 import ss2 from './assets/Screenshots/ssWebsiteMom2.jpg'
 import ss3 from './assets/Screenshots/sswebmom3.jpg'
-import ss4 from './assets/Screenshots/ssWebMom4.jpg'
+import ss4 from './assets/Screenshots/sswebMom4.jpg'
 import ss5 from './assets/Screenshots/SswebMom5.jpg'
 import ss6 from './assets/Screenshots/ssWebMom6.jpg'
 // ───────────────────────────────────────────────────────────────────────────
