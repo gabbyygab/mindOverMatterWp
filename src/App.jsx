@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 
 // ─── IMPORT YOUR ASSETS HERE ───────────────────────────────────────────────
 import gamePoster  from './assets/Posters/poster.png'
+import trailerVideo from './assets/Trailer/MindOverMatter Trailer 2.mp4'
 import einsteinImg from './assets/Posters/einstein.png'
 import teslaImg    from './assets/Posters/tesla.png'
 import newtonImg   from './assets/Posters/newton.png'
@@ -142,6 +143,7 @@ const VERSIONS = [
 
 const NAV_ITEMS = [
   { id: 'hero', label: 'HOME' },
+  { id: 'trailer', label: 'TRAILER' },
   { id: 'overview', label: 'OVERVIEW' },
   { id: 'objective', label: 'OBJECTIVE' },
   { id: 'characters', label: 'CHARACTERS' },
@@ -154,7 +156,7 @@ const NAV_ITEMS = [
 const TEAM_MEMBERS = [
   {
     name: 'ROBB JULLIAN OLAZO',
-    role: 'Assistant Developer',
+    role: 'Asst Dev and Assets Designer',
     img: robbImg,
     accent: '#00F5FF',
     accentClass: 'text-cyan-400',
@@ -593,6 +595,23 @@ export default function App() {
 
       {/* ══════════════ CONTENT ══════════════ */}
       <div className="max-w-5xl mx-auto px-3 sm:px-4 py-8 sm:py-12 space-y-12 sm:space-y-20">
+
+        {/* ── TRAILER ── */}
+        <Section id="trailer">
+          <SectionTitle color="text-yellow-400" accent="#FFE600">
+            ▶ OFFICIAL TRAILER ◀
+          </SectionTitle>
+          <Panel accent="#FFE600">
+            <div className="w-full aspect-video border border-yellow-400/30 bg-black relative">
+              <video 
+                controls 
+                preload="metadata"
+                className="w-full h-full object-cover"
+                src={trailerVideo}
+              />
+            </div>
+          </Panel>
+        </Section>
 
         {/* ── OVERVIEW ── */}
         <Section id="overview">
