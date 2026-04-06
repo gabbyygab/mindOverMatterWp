@@ -98,11 +98,23 @@ const scientists = [
 
 const VERSIONS = [
   {
-    tag: 'v1.0.0.3',
-    label: 'v1.0.0.3',
+    tag: 'v1.0.0.4',
+    label: 'v1.0.0.4',
     badge: 'LATEST',
     badgeColor: '#39FF14',
     isLatest: true,
+    downloadUrl: 'https://github.com/gabbyygab/mindOverMatterWp/releases/tag/v1.0.0.4',
+    changes: [
+      { type: 'NEW',   text: 'New download version' },
+    ],
+  },
+  {
+    tag: 'v1.0.0.3',
+    label: 'v1.0.0.3',
+    badge: null,
+    badgeColor: null,
+    isLatest: false,
+    downloadUrl: 'https://github.com/gabbyygab/mindOverMatterWp/releases/tag/v1.0.0.3',
     changes: [
       { type: 'FIX',   text: 'Layout bug fixes' },
     ],
@@ -380,7 +392,7 @@ export default function App() {
   const [activeNav, setActiveNav] = useState('hero')
   const [menuOpen, setMenuOpen] = useState(false)
   const [selectedChar, setSelectedChar] = useState(null)
-  const [selectedVersion, setSelectedVersion] = useState('v1.0.0.3')
+  const [selectedVersion, setSelectedVersion] = useState('v1.0.0.4')
   const [posterTilt, setPosterTilt] = useState({ x: 0, y: 0, shine: { x: 50, y: 50 } })
   const posterRef = useRef(null)
 
