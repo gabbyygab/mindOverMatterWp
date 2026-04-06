@@ -14,6 +14,9 @@ import ss3 from './assets/Screenshots/sswebmom3.jpg'
 import ss4 from './assets/Screenshots/sswebMom4.jpg'
 import ss5 from './assets/Screenshots/SswebMom5.jpg'
 import ss6 from './assets/Screenshots/ssWebMom6.jpg'
+import robbImg    from './assets/Team Members Picture/Robb Julian.jpg'
+import gabrielImg from './assets/Team Members Picture/Gabriel Delicana.jpg'
+import alexinImg  from './assets/Team Members Picture/Alexin.jpeg'
 // ───────────────────────────────────────────────────────────────────────────
 
 const scientists = [
@@ -133,6 +136,35 @@ const NAV_ITEMS = [
   { id: 'characters', label: 'CHARACTERS' },
   { id: 'specs', label: 'SPECS' },
   { id: 'download', label: 'DOWNLOAD' },
+  { id: 'team', label: 'TEAM' },
+  { id: 'feedback', label: 'FEEDBACK' },
+]
+
+const TEAM_MEMBERS = [
+  {
+    name: 'ROBB JULLIAN OLAZO',
+    role: 'Assets Designer',
+    img: robbImg,
+    accent: '#00F5FF',
+    accentClass: 'text-cyan-400',
+    bio: 'A 3rd-year BSIT-WMAD student at Bulacan State University with a strong foundation in backend development — proficient in Java, SQL, PHP, and JavaScript, with frontend experience in React, HTML, and CSS. Known for a problem-solving mindset and a logical approach to building efficient, scalable systems.',
+  },
+  {
+    name: 'JOHN GABRIEL DELICANA',
+    role: 'Lead Developer',
+    img: gabrielImg,
+    accent: '#FFE600',
+    accentClass: 'text-yellow-400',
+    bio: 'A BSIT student specializing in Web and Mobile Development. As Lead Developer of Mind Over Matter, he combined technical precision with creative vision — building an experience that is as functional as it is engaging. His passion lies in immersive storytelling and the mechanics of game design.',
+  },
+  {
+    name: 'JUSTIN ALEXIN SANTIAGO',
+    role: 'Assistant Developer',
+    img: alexinImg,
+    accent: '#39FF14',
+    accentClass: 'text-green-400',
+    bio: 'Supporting the core development cycle, Justin Alexin plays a vital role in the implementation and refinement of the game\'s mechanics. Working closely with the Lead Developer, he focuses on optimizing performance and streamlining the user experience to ensure a polished final product.',
+  },
 ]
 
 // ─── SECTION WRAPPER ──────────────────────────────────────────────────────
@@ -395,7 +427,7 @@ export default function App() {
         <div
           className="fixed inset-0 z-[59]"
           onClick={() => setMenuOpen(false)}
-          style={{ background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(2px)' }}
+          style={{ background: 'rgba(0,0,0,0.55)' }}
         />
       )}
 
@@ -404,15 +436,17 @@ export default function App() {
         {/* Main FAB button */}
         <button
           onClick={() => setMenuOpen(prev => !prev)}
-          className="w-14 h-14 md:w-20 md:h-20 rounded-full border-2 font-pixel flex items-center justify-center shrink-0 transition-all duration-300"
+          className="w-14 h-14 md:w-20 md:h-20 rounded-full border-2 font-pixel flex items-center justify-center shrink-0"
           style={{
             borderColor: menuOpen ? '#FF2D55' : '#FFE600',
             color: menuOpen ? '#FF2D55' : '#FFE600',
             background: menuOpen ? 'rgba(255,45,85,0.12)' : 'rgba(7,7,15,0.95)',
             boxShadow: menuOpen
-              ? '0 0 25px rgba(255,45,85,0.5), 0 0 50px rgba(255,45,85,0.15)'
-              : '0 0 20px rgba(255,230,0,0.35), 0 0 40px rgba(255,230,0,0.1)',
+              ? '0 0 22px rgba(255,45,85,0.45)'
+              : '0 0 18px rgba(255,230,0,0.3)',
             transform: menuOpen ? 'rotate(135deg)' : 'rotate(0deg)',
+            transition: 'transform 0.28s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease',
+            willChange: 'transform',
             fontSize: '20px',
           }}
         >
@@ -421,7 +455,7 @@ export default function App() {
 
         {/* Bubble nav items — stacked upward */}
         {menuOpen && (
-          <div className="flex flex-col items-center gap-2.5 md:gap-3.5">
+          <div className="flex flex-col items-center gap-2 md:gap-3">
             {[...NAV_ITEMS].reverse().map(({ id, label }, i) => {
               const isActive = activeNav === id
               const reverseI = NAV_ITEMS.length - 1 - i
@@ -429,19 +463,16 @@ export default function App() {
                 <button
                   key={id}
                   onClick={() => scrollTo(id)}
-                  className="font-pixel tracking-wider rounded-full border-2 text-center fab-bubble-in w-[130px] md:w-[220px]"
+                  className="font-pixel tracking-wider rounded-full border-2 text-center fab-bubble-in w-[130px] md:w-[200px]"
                   style={{
-                    fontSize: 'clamp(8px, 1.5vw, 14px)',
-                    padding: 'clamp(10px, 1.5vw, 18px) 0',
-                    animationDelay: `${reverseI * 0.06}s`,
-                    background: isActive
-                      ? 'linear-gradient(135deg, #FFE600, #FFC800)'
-                      : 'rgba(12,12,26,0.95)',
+                    fontSize: 'clamp(7px, 1.4vw, 12px)',
+                    padding: 'clamp(8px, 1.3vw, 15px) 0',
+                    animationDelay: `${reverseI * 0.035}s`,
+                    background: isActive ? '#FFE600' : 'rgba(12,12,26,0.96)',
                     color: isActive ? '#07070F' : '#d1d5db',
                     borderColor: isActive ? '#FFE600' : 'rgba(255,255,255,0.12)',
-                    boxShadow: isActive
-                      ? '0 0 16px rgba(255,230,0,0.4), inset 0 0 8px rgba(255,230,0,0.15)'
-                      : '0 2px 12px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05)',
+                    boxShadow: isActive ? '0 0 14px rgba(255,230,0,0.35)' : '0 2px 8px rgba(0,0,0,0.45)',
+                    willChange: 'transform, opacity',
                   }}
                 >
                   {label}
@@ -943,6 +974,129 @@ export default function App() {
           </Panel>
         </Section>
 
+        {/* ══════════════ TEAM / DEVELOPERS SECTION ══════════════ */}
+        <Section id="team">
+          <SectionTitle color="text-cyan-400" accent="#00F5FF">
+            ◈ MEET THE DEVELOPERS ◈
+          </SectionTitle>
+          <p className="font-pixel text-gray-500 tracking-[2px] text-center -mt-3 sm:-mt-4 mb-6 sm:mb-8"
+             style={{ fontSize: 'clamp(6px, 1.8vw, 8px)' }}>
+            BSIT-3DG2 · BULACAN STATE UNIVERSITY
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+            {TEAM_MEMBERS.map((m) => (
+              <div
+                key={m.name}
+                className="bg-[#0C0C1A] border border-gray-800 overflow-hidden relative flex flex-col"
+                style={{ transition: 'transform 0.2s' }}
+                onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-4px)'}
+                onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
+              >
+                {/* top accent bar */}
+                <div className="absolute top-0 left-0 right-0 h-[3px] z-10"
+                     style={{ background: m.accent, boxShadow: `0 0 12px ${m.accent}` }} />
+
+                {/* photo */}
+                <div className="w-full bg-black/40 overflow-hidden mt-[3px]" style={{ aspectRatio: '1/1' }}>
+                  <img
+                    src={m.img}
+                    alt={m.name}
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+
+                {/* info */}
+                <div className="p-3 sm:p-5 flex flex-col gap-2 flex-1">
+                  <p className={`font-pixel ${m.accentClass} leading-tight`}
+                     style={{ fontSize: 'clamp(6px, 1.8vw, 10px)', textShadow: `0 0 8px ${m.accent}` }}>
+                    {m.name}
+                  </p>
+                  <p className="font-pixel text-white/30 tracking-widest"
+                     style={{ fontSize: 'clamp(4px, 1.1vw, 7px)' }}>
+                    {m.role.toUpperCase()}
+                  </p>
+                  <p className="font-vt text-base sm:text-lg text-gray-400 leading-relaxed mt-1 flex-1">
+                    {m.bio}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Section>
+
+        {/* ══════════════ FEEDBACK SECTION ══════════════ */}
+        <Section id="feedback">
+          <SectionTitle color="text-rose-500" accent="#FF2D55">
+            ✉ GET IN TOUCH ✉
+          </SectionTitle>
+          <p className="font-pixel text-gray-500 tracking-[2px] text-center -mt-3 sm:-mt-4 mb-6 sm:mb-8"
+             style={{ fontSize: 'clamp(6px, 1.8vw, 8px)' }}>
+            FEEDBACK · BUG REPORTS · COLLAB
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Email card */}
+            <a
+              id="feedback-email"
+              href="mailto:delicanagabriel1212@gmail.com"
+              className="group bg-[#0C0C1A] border border-gray-800 relative overflow-hidden block transition-all duration-200 hover:-translate-y-1"
+            >
+              <div className="absolute top-0 left-0 right-0 h-[3px]"
+                   style={{ background: '#FF2D55', boxShadow: '0 0 12px #FF2D55' }} />
+              <div className="p-5 sm:p-7 flex flex-col gap-3 items-start">
+                <span className="font-pixel text-rose-500 tracking-widest"
+                      style={{ fontSize: 'clamp(6px, 1.5vw, 8px)', textShadow: '0 0 8px #FF2D55' }}>
+                  ✉ EMAIL
+                </span>
+                <p className="font-vt text-lg sm:text-2xl text-white group-hover:text-rose-400 transition-colors break-all">
+                  delicanagabriel1212@gmail.com
+                </p>
+                <span className="font-pixel text-gray-600 mt-1"
+                      style={{ fontSize: 'clamp(5px, 1.3vw, 7px)' }}>
+                  CLICK TO SEND EMAIL ▸
+                </span>
+              </div>
+            </a>
+
+            {/* Phone card */}
+            <a
+              id="feedback-phone"
+              href="tel:+639945771623"
+              className="group bg-[#0C0C1A] border border-gray-800 relative overflow-hidden block transition-all duration-200 hover:-translate-y-1"
+            >
+              <div className="absolute top-0 left-0 right-0 h-[3px]"
+                   style={{ background: '#00F5FF', boxShadow: '0 0 12px #00F5FF' }} />
+              <div className="p-5 sm:p-7 flex flex-col gap-3 items-start">
+                <span className="font-pixel text-cyan-400 tracking-widest"
+                      style={{ fontSize: 'clamp(6px, 1.5vw, 8px)', textShadow: '0 0 8px #00F5FF' }}>
+                  ☎ CONTACT NUMBER
+                </span>
+                <p className="font-vt text-lg sm:text-2xl text-white group-hover:text-cyan-400 transition-colors">
+                  0994 577 1623
+                </p>
+                <span className="font-pixel text-gray-600 mt-1"
+                      style={{ fontSize: 'clamp(5px, 1.3vw, 7px)' }}>
+                  JOHN GABRIEL M. DELICANA · LEAD DEV ▸
+                </span>
+              </div>
+            </a>
+          </div>
+
+          {/* extra note */}
+          <Panel accent="#FFE600" className="mt-4">
+            <p className="font-pixel text-yellow-400 tracking-widest mb-3"
+               style={{ fontSize: 'clamp(6px, 1.5vw, 8px)', textShadow: '0 0 8px rgba(255,230,0,0.6)' }}>
+              LEAVE YOUR THOUGHTS
+            </p>
+            <p className="font-vt text-lg sm:text-xl text-gray-400 leading-relaxed">
+              Found a bug? Have an idea for a new scientist fighter? Want to collaborate?
+              {' '}Drop us a message — we read every email and appreciate every bit of feedback.
+              Mind Over Matter is built by students, for players, and your input directly shapes the game.
+            </p>
+          </Panel>
+        </Section>
+
       </div>
 
       {/* ══════════════ FOOTER ══════════════ */}
@@ -951,9 +1105,20 @@ export default function App() {
            style={{ fontSize: 'clamp(8px, 2.2vw, 10px)', textShadow: '0 0 8px rgba(255,230,0,0.4)' }}>
           Mind Over Matter
         </p>
-        <p className="font-vt text-gray-700 text-sm sm:text-base tracking-widest mt-1">
-          © 2025 YOUR STUDIO NAME · ALL RIGHTS RESERVED
+        <p className="font-vt text-gray-600 text-sm sm:text-base tracking-widest mt-1">
+          © 2025 Mind Over Matter · All Rights Reserved
         </p>
+        {/* Developer credits */}
+        <div className="mt-3 flex flex-col items-center gap-1">
+          <p className="font-pixel text-cyan-400 tracking-widest"
+             style={{ fontSize: 'clamp(6px, 1.6vw, 8px)', textShadow: '0 0 8px #00F5FF' }}>
+            BSIT-3DG2
+          </p>
+          <p className="font-pixel text-gray-600 tracking-widest"
+             style={{ fontSize: 'clamp(5px, 1.3vw, 7px)' }}>
+            ROBB JULLIAN OLAZO · JOHN GABRIEL DELICANA · JUSTIN ALEXIN SANTIAGO
+          </p>
+        </div>
         <div className="flex justify-center gap-2 mt-3 text-lg">❤️ ❤️ ❤️</div>
         <p className="font-pixel text-gray-800 tracking-widest mt-3"
            style={{ fontSize: '7px', animation: 'blink 1s step-end infinite' }}>
@@ -971,12 +1136,11 @@ export default function App() {
         @keyframes blink   { 50% { opacity: 0; } }
         @keyframes marquee { from { transform: translateX(100vw); } to { transform: translateX(-100%); } }
         @keyframes fabBubbleIn {
-          0%   { opacity: 0; transform: scale(0.3) translateY(20px); }
-          60%  { opacity: 1; transform: scale(1.08) translateY(-2px); }
-          100% { opacity: 1; transform: scale(1) translateY(0); }
+          0%   { opacity: 0; transform: translateY(12px); }
+          100% { opacity: 1; transform: translateY(0); }
         }
         .fab-bubble-in {
-          animation: fabBubbleIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+          animation: fabBubbleIn 0.2s ease-out both;
         }
       `}</style>
     </div>
