@@ -154,7 +154,7 @@ const NAV_ITEMS = [
 const TEAM_MEMBERS = [
   {
     name: 'ROBB JULLIAN OLAZO',
-    role: 'Assets Designer',
+    role: 'Assistant Developer',
     img: robbImg,
     accent: '#00F5FF',
     accentClass: 'text-cyan-400',
@@ -722,7 +722,7 @@ export default function App() {
           </SectionTitle>
 
           {/* Mobile Requirements */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+          <div className="mb-4">
             <Panel accent="#39FF14">
               <p className="font-pixel text-green-400 tracking-widest mb-3 sm:mb-4"
                  style={{ fontSize: 'clamp(7px, 2vw, 9px)', textShadow: '0 0 8px #39FF14' }}>
@@ -737,26 +737,6 @@ export default function App() {
                 ].map(([label, val]) => (
                   <div key={label} className="flex items-start gap-1.5 sm:gap-2">
                     <span className="font-pixel text-green-400 shrink-0 w-14 sm:w-16" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>{label}</span>
-                    <span className="font-vt text-gray-300 text-base sm:text-lg leading-tight">{val}</span>
-                  </div>
-                ))}
-              </div>
-            </Panel>
-
-            <Panel accent="#BF00FF">
-              <p className="font-pixel text-purple-500 tracking-widest mb-3 sm:mb-4"
-                 style={{ fontSize: 'clamp(7px, 2vw, 9px)', textShadow: '0 0 8px #BF00FF' }}>
-                iOS
-              </p>
-              <div className="space-y-2 sm:space-y-3">
-                {[
-                  ['OS', 'iOS 15.0+'],
-                  ['DEVICE', 'iPhone / iPad'],
-                  ['GPU', 'Metal-capable'],
-                  ['DISPLAY', 'Landscape · Auto-rotation'],
-                ].map(([label, val]) => (
-                  <div key={label} className="flex items-start gap-1.5 sm:gap-2">
-                    <span className="font-pixel text-purple-500 shrink-0 w-14 sm:w-16" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>{label}</span>
                     <span className="font-vt text-gray-300 text-base sm:text-lg leading-tight">{val}</span>
                   </div>
                 ))}
