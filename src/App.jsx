@@ -390,22 +390,22 @@ export default function App() {
   }
   const handlePosterMouseLeave = () => setPosterTilt({ x: 0, y: 0, shine: { x: 50, y: 50 } })
 
-  // ── TODO: Replace these with real MediaFire API data ──
-  const [downloadUrl, setDownloadUrl] = useState('https://github.com/gabbyygab/mindOverMatterWp/releases/tag/v1.0.0.3')
-  const [downloadCount, setDownloadCount] = useState('—')
-  const [fileSize, setFileSize] = useState('—')
+  // ── Fetch stats for ALL releases so past versions also show download info ──
+  const [releaseStats, setReleaseStats] = useState({}) // tag -> { downloadCount, fileSize, downloadUrl }
   useEffect(() => {
-    fetch('https://api.github.com/repos/gabbyygab/mindOverMatterWp/releases/latest')
-      .then(res => res.ok ? res.json() : null)
-      .then(data => {
-        if (!data) return
-        const apk = data.assets?.find(a => a.name.endsWith('.apk'))
-        if (apk) {
-          setDownloadUrl(apk.browser_download_url)
-          setDownloadCount(apk.download_count > 0 ? apk.download_count.toLocaleString() : '—')
-          const mb = (apk.size / (1024 * 1024)).toFixed(0)
-          setFileSize(`~${mb} MB`)
-        }
+    fetch('https://api.github.com/repos/gabbyygab/mindOverMatterWp/releases')
+      .then(res => res.ok ? res.json() : [])
+      .then(releases => {
+        const map = {}
+        releases.forEach(release => {
+          const apk = release.assets?.find(a => a.name.endsWith('.apk'))
+          map[release.tag_name] = {
+            downloadCount: apk ? (apk.download_count > 0 ? apk.download_count.toLocaleString() : '0') : '—',
+            fileSize: apk ? `~${(apk.size / (1024 * 1024)).toFixed(0)} MB` : '—',
+            downloadUrl: apk ? apk.browser_download_url : release.html_url,
+          }
+        })
+        setReleaseStats(map)
       })
       .catch(() => {})
   }, [])
@@ -852,7 +852,8 @@ export default function App() {
           {/* ── VERSION DETAIL PANEL ── */}
           {VERSIONS.map(v => {
             if (v.tag !== selectedVersion) return null
-            const activeUrl = v.isLatest ? downloadUrl : v.downloadUrl
+            const stats = releaseStats[v.tag]
+            const activeUrl = stats?.downloadUrl || v.downloadUrl || 'https://github.com/gabbyygab/mindOverMatterWp/releases'
             return (
               <Panel key={v.tag} accent="#FFE600" className="text-center mb-4">
                 {/* version badge */}
@@ -875,23 +876,19 @@ export default function App() {
                   </a>
                 </div>
 
-                {/* file info — only show live stats for latest */}
+                {/* file info — show for all versions */}
                 <div className="flex justify-center gap-4 sm:gap-8 flex-wrap mb-4 sm:mb-6">
-                  {v.isLatest && (
-                    <>
-                      <div className="text-center">
-                        <p className="font-pixel text-gray-500" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>FILE SIZE</p>
-                        <p className="font-vt text-lg sm:text-xl text-white mt-1">{fileSize}</p>
-                      </div>
-                      <div className="text-center">
-                        <p className="font-pixel text-gray-500" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>DOWNLOADS</p>
-                        <p className="font-vt text-lg sm:text-xl text-cyan-400 mt-1"
-                           style={{ textShadow: '0 0 8px #00F5FF' }}>
-                          {downloadCount}
-                        </p>
-                      </div>
-                    </>
-                  )}
+                  <div className="text-center">
+                    <p className="font-pixel text-gray-500" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>FILE SIZE</p>
+                    <p className="font-vt text-lg sm:text-xl text-white mt-1">{stats?.fileSize ?? '—'}</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="font-pixel text-gray-500" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>DOWNLOADS</p>
+                    <p className="font-vt text-lg sm:text-xl text-cyan-400 mt-1"
+                       style={{ textShadow: '0 0 8px #00F5FF' }}>
+                      {stats?.downloadCount ?? '—'}
+                    </p>
+                  </div>
                   <div className="text-center">
                     <p className="font-pixel text-gray-500" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>PLATFORM</p>
                     <p className="font-vt text-lg sm:text-xl text-white mt-1">ANDROID 7.1+</p>
