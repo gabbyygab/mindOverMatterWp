@@ -97,11 +97,22 @@ const scientists = [
 
 const VERSIONS = [
   {
-    tag: 'v1.0.0.2',
-    label: 'v1.0.0.2',
+    tag: 'v1.0.0.3',
+    label: 'v1.0.0.3',
     badge: 'LATEST',
     badgeColor: '#39FF14',
     isLatest: true,
+    changes: [
+      { type: 'FIX',   text: 'Layout bug fixes' },
+    ],
+  },
+  {
+    tag: 'v1.0.0.2',
+    label: 'v1.0.0.2',
+    badge: null,
+    badgeColor: null,
+    isLatest: false,
+    downloadUrl: 'https://github.com/gabbyygab/mindOverMatterWp/releases/tag/v1.0.0.2',
     changes: [
       { type: 'NEW',   text: 'Options Menu' },
       { type: 'NEW',   text: 'Pointing System' },
@@ -367,7 +378,7 @@ export default function App() {
   const [activeNav, setActiveNav] = useState('hero')
   const [menuOpen, setMenuOpen] = useState(false)
   const [selectedChar, setSelectedChar] = useState(null)
-  const [selectedVersion, setSelectedVersion] = useState('v1.0.0.2')
+  const [selectedVersion, setSelectedVersion] = useState('v1.0.0.3')
   const [posterTilt, setPosterTilt] = useState({ x: 0, y: 0, shine: { x: 50, y: 50 } })
   const posterRef = useRef(null)
 
@@ -380,7 +391,7 @@ export default function App() {
   const handlePosterMouseLeave = () => setPosterTilt({ x: 0, y: 0, shine: { x: 50, y: 50 } })
 
   // ── TODO: Replace these with real MediaFire API data ──
-  const [downloadUrl, setDownloadUrl] = useState('https://github.com/gabbyygab/mindOverMatterWp/releases/tag/v1.0.0.2')
+  const [downloadUrl, setDownloadUrl] = useState('https://github.com/gabbyygab/mindOverMatterWp/releases/tag/v1.0.0.3')
   const [downloadCount, setDownloadCount] = useState('—')
   const [fileSize, setFileSize] = useState('—')
   useEffect(() => {
