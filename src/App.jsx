@@ -1,7 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
 
 // ─── IMPORT YOUR ASSETS HERE ───────────────────────────────────────────────
-import gamePoster  from './assets/Posters/poster.png'
+import gamePoster from './assets/Posters/poster.png'
+import carouselEinstein    from './assets/HeroCarouselPics/Einstein_poster_for_202604110028.jpeg'
+import carouselNewton      from './assets/HeroCarouselPics/Galactic_poster_Isaac_202604110028.jpeg'
+import carouselGalileo     from './assets/HeroCarouselPics/Galileo_dropping_two_202604110028.jpeg'
+import carouselGame        from './assets/HeroCarouselPics/Game_poster_for_202604110028.jpeg'
+import carouselOppenheimer from './assets/HeroCarouselPics/Oppenheimer_holding_physics_202604110028.jpeg'
+import carouselDarwin      from './assets/HeroCarouselPics/Poster_for_Darwin_202604110028.jpeg'
 import trailerVideo from './assets/Trailer/MindOverMatter Trailer 2.mp4'
 import einsteinImg from './assets/Posters/einstein.png'
 import teslaImg    from './assets/Posters/tesla.png'
@@ -18,6 +24,29 @@ import ss6 from './assets/Screenshots/ssWebMom6.jpg'
 import robbImg    from './assets/Team Members Picture/Robb Julian.jpg'
 import gabrielImg from './assets/Team Members Picture/Gabriel Delicana.jpg'
 import alexinImg  from './assets/Team Members Picture/Alexin.jpeg'
+// ─── CHARACTER GUIDE IMAGES ────────────────────────────────────────────────
+import einsteinSpecial  from './assets/Gameplay Guide/CharacterGuides/einstein-special.jpg'
+import einsteinUlt      from './assets/Gameplay Guide/CharacterGuides/einstein-ultimate.jpg'
+import teslaSpecial     from './assets/Gameplay Guide/CharacterGuides/tesla-special.jpg'
+import teslaUlt         from './assets/Gameplay Guide/CharacterGuides/tesla-ult.jpg'
+import newtonSpecial    from './assets/Gameplay Guide/CharacterGuides/newton-special.jpg'
+import newtonUlt        from './assets/Gameplay Guide/CharacterGuides/newton-ult.jpg'
+import galileoSpecial   from './assets/Gameplay Guide/CharacterGuides/galileo-special.jpg'
+import galileoUlt       from './assets/Gameplay Guide/CharacterGuides/galileo-ult.jpg'
+import darwinSpecial    from './assets/Gameplay Guide/CharacterGuides/darwin-special.jpg'
+import darwinUlt        from './assets/Gameplay Guide/CharacterGuides/darwin-ult.jpg'
+import oppieSpecial     from './assets/Gameplay Guide/CharacterGuides/oppie-skill.jpg'
+import oppieUlt         from './assets/Gameplay Guide/CharacterGuides/oppie-ult.jpg'
+// ─── HOW TO PLAY IMAGES ────────────────────────────────────────────────────
+import htpAttacks         from './assets/Gameplay Guide/attacks.jpg'
+import htpCharSelect      from './assets/Gameplay Guide/character-select.jpg'
+import htpHealthBar       from './assets/Gameplay Guide/health-bar-intelligence-round-circle.jpg'
+import htpMapSelection    from './assets/Gameplay Guide/map-selection.jpg'
+import htpMovement        from './assets/Gameplay Guide/movement.jpg'
+import htpMultiplayer     from './assets/Gameplay Guide/multiplayer.jpg'
+import htpSettings        from './assets/Gameplay Guide/settings.jpg'
+import htpSettings2       from './assets/Gameplay Guide/settings2.jpg'
+import htpTraining        from './assets/Gameplay Guide/training.jpg'
 // ───────────────────────────────────────────────────────────────────────────
 
 const scientists = [
@@ -32,6 +61,8 @@ const scientists = [
     bgClass: 'bg-yellow-400',
     skill: 'Relativity Teleport',
     ult: 'Time Dilation',
+    skillImg: einsteinSpecial,
+    ultImg: einsteinUlt,
   },
   {
     name: 'NIKOLA TESLA',
@@ -44,6 +75,8 @@ const scientists = [
     bgClass: 'bg-cyan-400',
     skill: 'Resonance Step',
     ult: 'Wardenclyffe',
+    skillImg: teslaSpecial,
+    ultImg: teslaUlt,
   },
   {
     name: 'ISAAC NEWTON',
@@ -56,6 +89,8 @@ const scientists = [
     bgClass: 'bg-green-400',
     skill: 'Gravitational Apple',
     ult: 'The Principia: Universal Gravitation',
+    skillImg: newtonSpecial,
+    ultImg: newtonUlt,
   },
   {
     name: 'GALILEO GALILEI',
@@ -68,6 +103,8 @@ const scientists = [
     bgClass: 'bg-rose-500',
     skill: 'Inertial Dash',
     ult: 'Sidereus Nuncius',
+    skillImg: galileoSpecial,
+    ultImg: galileoUlt,
   },
   {
     name: 'CHARLES DARWIN',
@@ -81,6 +118,8 @@ const scientists = [
     skill: 'Survival of the Fittest',
     skillTag: 'Passive',
     ult: 'The Apex Origin',
+    skillImg: darwinSpecial,
+    ultImg: darwinUlt,
   },
   {
     name: 'J. ROBERT OPPENHEIMER',
@@ -93,16 +132,41 @@ const scientists = [
     bgClass: 'bg-purple-500',
     skill: 'Chain Reaction Dash',
     ult: 'The Destroyer of Worlds',
+    skillImg: oppieSpecial,
+    ultImg: oppieUlt,
   },
+]
+
+const CAROUSEL_POSTERS = [
+  { img: gamePoster,          label: 'MIND OVER MATTER' },
+  { img: carouselGame,        label: 'OFFICIAL POSTER' },
+  { img: carouselEinstein,    label: 'ALBERT EINSTEIN' },
+  { img: carouselNewton,      label: 'ISAAC NEWTON' },
+  { img: carouselGalileo,     label: 'GALILEO GALILEI' },
+  { img: carouselOppenheimer, label: 'J.R. OPPENHEIMER' },
+  { img: carouselDarwin,      label: 'CHARLES DARWIN' },
 ]
 
 const VERSIONS = [
   {
-    tag: 'v1.0.0.4',
-    label: 'v1.0.0.4',
+    tag: 'v1.0.0.5-BETA',
+    label: 'v1.0.0.5-BETA',
     badge: 'LATEST',
     badgeColor: '#39FF14',
     isLatest: true,
+    isBeta: true,
+    downloadUrl: 'https://github.com/gabbyygab/mindOverMatterWp/releases/tag/v1.0.0.5-BETA',
+    changes: [
+      { type: 'NEW',   text: 'Beta testing release' },
+      { type: 'NEW',   text: 'Open beta — report bugs to the team' },
+    ],
+  },
+  {
+    tag: 'v1.0.0.4',
+    label: 'v1.0.0.4',
+    badge: null,
+    badgeColor: null,
+    isLatest: false,
     downloadUrl: 'https://github.com/gabbyygab/mindOverMatterWp/releases/tag/v1.0.0.4',
     changes: [
       { type: 'NEW',   text: 'New download version' },
@@ -159,6 +223,7 @@ const NAV_ITEMS = [
   { id: 'overview', label: 'OVERVIEW' },
   { id: 'objective', label: 'OBJECTIVE' },
   { id: 'characters', label: 'CHARACTERS' },
+  { id: 'howtoplay', label: 'HOW TO PLAY' },
   { id: 'specs', label: 'SPECS' },
   { id: 'download', label: 'DOWNLOAD' },
   { id: 'team', label: 'TEAM' },
@@ -172,7 +237,7 @@ const TEAM_MEMBERS = [
     img: robbImg,
     accent: '#00F5FF',
     accentClass: 'text-cyan-400',
-    bio: 'A 3rd-year BSIT-WMAD student at Bulacan State University with a strong foundation in backend development — proficient in Java, SQL, PHP, and JavaScript, with frontend experience in React, HTML, and CSS. Known for a problem-solving mindset and a logical approach to building efficient, scalable systems.',
+    bio: 'A 3rd-year BSIT-WMAD student at Bulacan State University with a strong foundation in backend development, proficient in Java, SQL, PHP, and JavaScript, with frontend experience in React, HTML, and CSS. Conceptualized the idea for Mind Over Matter, aiming to create a fun and engaging game that subtly introduces children to famous scientists while promoting learning through play.',
   },
   {
     name: 'JOHN GABRIEL DELICANA',
@@ -180,7 +245,7 @@ const TEAM_MEMBERS = [
     img: gabrielImg,
     accent: '#FFE600',
     accentClass: 'text-yellow-400',
-    bio: 'A BSIT student specializing in Web and Mobile Development. As Lead Developer of Mind Over Matter, he combined technical precision with creative vision — building an experience that is as functional as it is engaging. His passion lies in immersive storytelling and the mechanics of game design.',
+    bio: 'A 3rd-year BSIT-WMAD student at Bulacan State University specializing in Web and Mobile Development. As Lead Developer of Mind Over Matter, he translated the team\'s vision into a fully playable experience — engineering the core systems, game mechanics, and overall architecture from the ground up. Driven by a passion for immersive design and interactive storytelling, he believes great games are built at the intersection of code and creativity.',
   },
   {
     name: 'JUSTIN ALEXIN SANTIAGO',
@@ -348,12 +413,9 @@ function CharModal({ s, onClose }) {
                 </p>
                 <p className={`font-vt text-base sm:text-xl ${s.accentClass} mt-0.5`}>{s.skill}</p>
               </div>
-              <div className="aspect-video flex flex-col items-center justify-center border border-dashed m-2"
-                   style={{ borderColor: `${s.accent}40` }}>
-                <span className="font-pixel text-white/20 text-center leading-loose"
-                      style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>
-                  ▶ VIDEO<br />COMING SOON
-                </span>
+              <div className="aspect-video overflow-hidden m-2"
+                   style={{ border: `1px solid ${s.accent}40`, boxShadow: `0 0 12px ${s.accent}20` }}>
+                <img src={s.skillImg} alt={`${s.skill} preview`} className="w-full h-full object-cover" />
               </div>
             </div>
 
@@ -369,12 +431,9 @@ function CharModal({ s, onClose }) {
                   {s.ult}
                 </p>
               </div>
-              <div className="aspect-video flex flex-col items-center justify-center border border-dashed m-2"
-                   style={{ borderColor: `${s.accent}40` }}>
-                <span className="font-pixel text-white/20 text-center leading-loose"
-                      style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>
-                  ▶ VIDEO<br />COMING SOON
-                </span>
+              <div className="aspect-video overflow-hidden m-2"
+                   style={{ border: `1px solid ${s.accent}40`, boxShadow: `0 0 12px ${s.accent}20` }}>
+                <img src={s.ultImg} alt={`${s.ult} preview`} className="w-full h-full object-cover" />
               </div>
             </div>
           </div>
@@ -392,17 +451,25 @@ export default function App() {
   const [activeNav, setActiveNav] = useState('hero')
   const [menuOpen, setMenuOpen] = useState(false)
   const [selectedChar, setSelectedChar] = useState(null)
-  const [selectedVersion, setSelectedVersion] = useState('v1.0.0.4')
-  const [posterTilt, setPosterTilt] = useState({ x: 0, y: 0, shine: { x: 50, y: 50 } })
-  const posterRef = useRef(null)
+  const [selectedVersion, setSelectedVersion] = useState('v1.0.0.5-BETA')
+  const [carouselIdx, setCarouselIdx] = useState(0)
+  const [cardTilts, setCardTilts] = useState(() => CAROUSEL_POSTERS.map(() => ({ x: 0, y: 0, shine: { x: 50, y: 50 } })))
+  const cardRefs = useRef([])
+  const touchStartX = useRef(null)
 
-  const handlePosterMouseMove = (e) => {
-    const rect = posterRef.current.getBoundingClientRect()
+  const handleCardMouseMove = (e, i) => {
+    const el = cardRefs.current[i]
+    if (!el) return
+    const rect = el.getBoundingClientRect()
     const dx = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2)
     const dy = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2)
-    setPosterTilt({ x: dy * -14, y: dx * 14, shine: { x: 50 + dx * 30, y: 50 + dy * 30 } })
+    setCardTilts(prev => prev.map((t, j) => j === i ? { x: dy * -14, y: dx * 14, shine: { x: 50 + dx * 30, y: 50 + dy * 30 } } : t))
   }
-  const handlePosterMouseLeave = () => setPosterTilt({ x: 0, y: 0, shine: { x: 50, y: 50 } })
+  const handleCardMouseLeave = (i) => {
+    setCardTilts(prev => prev.map((t, j) => j === i ? { x: 0, y: 0, shine: { x: 50, y: 50 } } : t))
+  }
+  const carouselPrev = () => setCarouselIdx(i => (i - 1 + CAROUSEL_POSTERS.length) % CAROUSEL_POSTERS.length)
+  const carouselNext = () => setCarouselIdx(i => (i + 1) % CAROUSEL_POSTERS.length)
 
   // ── Fetch stats for ALL releases so past versions also show download info ──
   const [releaseStats, setReleaseStats] = useState({}) // tag -> { downloadCount, fileSize, downloadUrl }
@@ -435,6 +502,18 @@ export default function App() {
       className="min-h-screen text-white overflow-x-hidden"
       style={{ backgroundColor: '#07070F', fontFamily: '"VT323", monospace' }}
     >
+      {/* ── GLOBAL HERO BACKGROUND (fixed, behind every section) ── */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none select-none z-0">
+        <img src={einsteinImg}    alt="" className="absolute object-cover" style={{ top: '-8%',  left: '-6%',  width: 'clamp(90px,28vw,36%)', opacity: 0.10, transform: 'rotate(-13deg)', filter: 'blur(1px) saturate(2)' }} />
+        <img src={teslaImg}       alt="" className="absolute object-cover" style={{ top: '4%',   right: '-8%', width: 'clamp(80px,24vw,32%)', opacity: 0.09, transform: 'rotate(11deg)',  filter: 'blur(1px) saturate(2)' }} />
+        <img src={newtonImg}      alt="" className="absolute object-cover" style={{ bottom: '-6%', left: '6%', width: 'clamp(75px,22vw,30%)', opacity: 0.09, transform: 'rotate(8deg)',   filter: 'blur(1px) saturate(1.8)' }} />
+        <img src={galileoImg}     alt="" className="absolute object-cover" style={{ bottom: '2%', right: '8%', width: 'clamp(70px,20vw,28%)', opacity: 0.08, transform: 'rotate(-9deg)',  filter: 'blur(1px) saturate(1.8)' }} />
+        <img src={darwinImg}      alt="" className="absolute object-cover" style={{ top: '22%',  left: '-3%', width: 'clamp(55px,16vw,22%)', opacity: 0.06, transform: 'rotate(18deg)',  filter: 'blur(2px) saturate(1.5)' }} />
+        <img src={oppenheimerImg} alt="" className="absolute object-cover" style={{ top: '18%',  right: '-3%',width: 'clamp(60px,18vw,24%)', opacity: 0.06, transform: 'rotate(-20deg)', filter: 'blur(2px) saturate(1.5)' }} />
+        {/* colour atmosphere */}
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 18% 25%, rgba(255,45,85,0.10) 0%, transparent 48%), radial-gradient(ellipse at 82% 75%, rgba(0,245,255,0.08) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(255,230,0,0.05) 0%, transparent 55%)' }} />
+      </div>
+
       {/* scanlines */}
       <div
         className="fixed inset-0 pointer-events-none z-50"
@@ -480,7 +559,8 @@ export default function App() {
 
         {/* Bubble nav items — stacked upward */}
         {menuOpen && (
-          <div className="flex flex-col items-center gap-2 md:gap-3">
+          <div className="flex flex-col items-center gap-1.5"
+               style={{ maxHeight: 'calc(100vh - 100px)', overflowY: 'auto', overflowX: 'hidden', paddingRight: '2px' }}>
             {[...NAV_ITEMS].reverse().map(({ id, label }, i) => {
               const isActive = activeNav === id
               const reverseI = NAV_ITEMS.length - 1 - i
@@ -488,10 +568,10 @@ export default function App() {
                 <button
                   key={id}
                   onClick={() => scrollTo(id)}
-                  className="font-pixel tracking-wider rounded-full border-2 text-center fab-bubble-in w-[130px] md:w-[200px]"
+                  className="font-pixel tracking-wider rounded-full border-2 text-center fab-bubble-in w-[120px] md:w-[180px] shrink-0"
                   style={{
-                    fontSize: 'clamp(7px, 1.4vw, 12px)',
-                    padding: 'clamp(8px, 1.3vw, 15px) 0',
+                    fontSize: 'clamp(6px, 1.3vw, 10px)',
+                    padding: 'clamp(6px, 1vw, 11px) 0',
                     animationDelay: `${reverseI * 0.035}s`,
                     background: isActive ? '#FFE600' : 'rgba(12,12,26,0.96)',
                     color: isActive ? '#07070F' : '#d1d5db',
@@ -512,48 +592,123 @@ export default function App() {
       <Section id="hero">
         <div className="relative min-h-screen flex flex-col items-center justify-center px-4 pb-16 overflow-hidden">
 
-          {/* ── COLLAGE BACKGROUND ── */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
-            <img src={einsteinImg}    alt="" className="absolute object-cover" style={{ top: '-8%',  left: '-6%',  width: 'clamp(90px,28vw,36%)', opacity: 0.18, transform: 'rotate(-13deg)', filter: 'blur(1px) saturate(2)' }} />
-            <img src={teslaImg}       alt="" className="absolute object-cover" style={{ top: '4%',   right: '-8%', width: 'clamp(80px,24vw,32%)', opacity: 0.16, transform: 'rotate(11deg)',  filter: 'blur(1px) saturate(2)' }} />
-            <img src={newtonImg}      alt="" className="absolute object-cover" style={{ bottom: '-6%', left: '6%', width: 'clamp(75px,22vw,30%)', opacity: 0.15, transform: 'rotate(8deg)',   filter: 'blur(1px) saturate(1.8)' }} />
-            <img src={galileoImg}     alt="" className="absolute object-cover" style={{ bottom: '2%', right: '8%', width: 'clamp(70px,20vw,28%)', opacity: 0.14, transform: 'rotate(-9deg)',  filter: 'blur(1px) saturate(1.8)' }} />
-            <img src={darwinImg}      alt="" className="absolute object-cover" style={{ top: '22%',  left: '-3%', width: 'clamp(55px,16vw,22%)', opacity: 0.10, transform: 'rotate(18deg)',  filter: 'blur(2px) saturate(1.5)' }} />
-            <img src={oppenheimerImg} alt="" className="absolute object-cover" style={{ top: '18%',  right: '-3%',width: 'clamp(60px,18vw,24%)', opacity: 0.10, transform: 'rotate(-20deg)', filter: 'blur(2px) saturate(1.5)' }} />
-            {/* radial dark center so text stays readable */}
-            <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at center, rgba(7,7,15,0.35) 0%, rgba(7,7,15,0.72) 55%, rgba(7,7,15,0.94) 100%)' }} />
-            {/* colour atmosphere */}
-            <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 18% 25%, rgba(255,45,85,0.13) 0%, transparent 48%), radial-gradient(ellipse at 82% 75%, rgba(0,245,255,0.10) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(255,230,0,0.07) 0%, transparent 55%)' }} />
-          </div>
-
           {/* ── INSERT COIN ── */}
           <p className="relative z-10 font-pixel text-yellow-400 tracking-widest mb-5"
              style={{ fontSize: 'clamp(7px, 2vw, 9px)', animation: 'blink 1s step-end infinite' }}>
             ★ INSERT COIN TO CONTINUE ★
           </p>
 
-          {/* ── INTERACTIVE POSTER ── */}
-          <div
-            ref={posterRef}
-            onMouseMove={handlePosterMouseMove}
-            onMouseLeave={handlePosterMouseLeave}
-            className="relative z-10 mb-7 cursor-pointer"
-            style={{
-              width: 'min(300px, 68vw)',
-              transform: `perspective(700px) rotateX(${posterTilt.x}deg) rotateY(${posterTilt.y}deg) scale(${posterTilt.x !== 0 || posterTilt.y !== 0 ? 1.05 : 1})`,
-              transition: posterTilt.x === 0 && posterTilt.y === 0 ? 'transform 0.55s cubic-bezier(0.23,1,0.32,1)' : 'transform 0.08s ease',
-              transformStyle: 'preserve-3d',
-            }}
-          >
-            {/* outer glow ring */}
-            <div className="absolute -inset-[6px] rounded-sm pointer-events-none"
-                 style={{ background: 'linear-gradient(135deg, #FFE600, #FF2D55, #00F5FF, #FFE600)', opacity: 0.7, filter: 'blur(6px)' }} />
-            <div className="relative border-2 border-yellow-400 overflow-hidden"
-                 style={{ boxShadow: `0 0 50px rgba(255,230,0,0.45), 0 0 100px rgba(255,45,85,0.2), 0 ${20 + posterTilt.x * 1.5}px 70px rgba(0,0,0,0.9)` }}>
-              <img src={gamePoster} alt="Mind Over Matter — Game Poster" className="w-full block" />
-              {/* glare overlay */}
-              <div className="absolute inset-0 pointer-events-none"
-                   style={{ background: `radial-gradient(circle at ${posterTilt.shine.x}% ${posterTilt.shine.y}%, rgba(255,255,255,0.14) 0%, transparent 55%)` }} />
+          {/* ── POSTER CAROUSEL ── */}
+          <div className="relative z-10 mb-2 w-full flex flex-col items-center">
+            {/* card track */}
+            <div
+              className="relative w-full"
+              style={{ height: 'min(360px, 78vw)' }}
+              onTouchStart={e => { touchStartX.current = e.touches[0].clientX }}
+              onTouchEnd={e => {
+                if (touchStartX.current === null) return
+                const dx = e.changedTouches[0].clientX - touchStartX.current
+                if (dx > 40) carouselPrev()
+                else if (dx < -40) carouselNext()
+                touchStartX.current = null
+              }}
+            >
+              {CAROUSEL_POSTERS.map((item, i) => {
+                // circular offset so both sides are always populated
+                const n = CAROUSEL_POSTERS.length
+                let offset = ((i - carouselIdx) % n + n) % n
+                if (offset > n / 2) offset -= n
+                if (Math.abs(offset) > 2) return null
+                const tilt = cardTilts[i]
+                const isCenter = offset === 0
+                const absOff = Math.abs(offset)
+                const isTilting = tilt.x !== 0 || tilt.y !== 0
+                const scale = isCenter ? 1 : absOff === 1 ? 0.72 : 0.50
+                const rotateY = isCenter ? tilt.y : offset * -22
+                const rotateX = isCenter ? tilt.x : 0
+                const opacity = isCenter ? 1 : absOff === 1 ? 0.58 : 0.28
+                const zIdx = 10 - absOff * 3
+                return (
+                  <div
+                    key={i}
+                    ref={el => cardRefs.current[i] = el}
+                    onMouseMove={e => handleCardMouseMove(e, i)}
+                    onMouseLeave={() => handleCardMouseLeave(i)}
+                    onClick={() => !isCenter && setCarouselIdx(i)}
+                    className="absolute top-1/2 left-1/2"
+                    style={{
+                      width: 'min(230px, 50vw)',
+                      transform: `translate(calc(-50% + ${offset} * clamp(115px, 23vw, 195px)), -50%) perspective(700px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`,
+                      transition: isTilting
+                        ? 'transform 0.08s ease'
+                        : 'transform 0.45s cubic-bezier(0.23,1,0.32,1), opacity 0.45s ease, filter 0.45s ease',
+                      transformStyle: 'preserve-3d',
+                      zIndex: zIdx,
+                      opacity,
+                      cursor: isCenter ? 'default' : 'pointer',
+                      filter: isCenter ? 'none' : `brightness(0.65) blur(${absOff === 2 ? 1 : 0}px)`,
+                    }}
+                  >
+                    {/* outer glow ring */}
+                    <div className="absolute -inset-[6px] rounded-sm pointer-events-none"
+                         style={{ background: 'linear-gradient(135deg, #FFE600, #FF2D55, #00F5FF, #FFE600)', opacity: isCenter ? 0.70 : 0.18, filter: 'blur(6px)' }} />
+                    {/* card face */}
+                    <div className="relative border-2 overflow-hidden"
+                         style={{
+                           borderColor: isCenter ? '#FFE600' : 'rgba(255,230,0,0.25)',
+                           boxShadow: isCenter
+                             ? `0 0 50px rgba(255,230,0,0.45), 0 0 100px rgba(255,45,85,0.2), 0 ${20 + rotateX * 1.5}px 70px rgba(0,0,0,0.9)`
+                             : '0 0 18px rgba(0,0,0,0.85)',
+                         }}>
+                      <img src={item.img} alt={item.label} className="w-full block"
+                           style={{ aspectRatio: '3/4', objectFit: 'cover', display: 'block' }} />
+                      {/* glare */}
+                      <div className="absolute inset-0 pointer-events-none"
+                           style={{ background: `radial-gradient(circle at ${tilt.shine.x}% ${tilt.shine.y}%, rgba(255,255,255,${isCenter ? 0.15 : 0.04}) 0%, transparent 55%)` }} />
+                      {/* label strip */}
+                      <div className="absolute bottom-0 left-0 right-0 px-2 py-2"
+                           style={{ background: 'linear-gradient(transparent, rgba(0,0,0,0.92))' }}>
+                        <p className="font-pixel text-yellow-400 text-center tracking-widest"
+                           style={{ fontSize: 'clamp(4px, 1.1vw, 6px)', textShadow: '0 0 8px #FFE600' }}>
+                          {item.label}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+
+            {/* ── CAROUSEL CONTROLS ── */}
+            <div className="relative z-10 flex items-center gap-3 mt-3">
+              <button
+                onClick={carouselPrev}
+                className="font-pixel text-yellow-400 border border-yellow-400/40 hover:border-yellow-400 hover:bg-yellow-400/10 transition-all"
+                style={{ fontSize: '10px', padding: '5px 10px', lineHeight: 1 }}
+              >◀</button>
+
+              {/* dot indicators */}
+              <div className="flex items-center gap-[6px]">
+                {CAROUSEL_POSTERS.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCarouselIdx(i)}
+                    className="rounded-full transition-all duration-300"
+                    style={{
+                      width: i === carouselIdx ? '16px' : '5px',
+                      height: '5px',
+                      background: i === carouselIdx ? '#FFE600' : 'rgba(255,230,0,0.28)',
+                      boxShadow: i === carouselIdx ? '0 0 8px #FFE600' : 'none',
+                    }}
+                  />
+                ))}
+              </div>
+
+              <button
+                onClick={carouselNext}
+                className="font-pixel text-yellow-400 border border-yellow-400/40 hover:border-yellow-400 hover:bg-yellow-400/10 transition-all"
+                style={{ fontSize: '10px', padding: '5px 10px', lineHeight: 1 }}
+              >▶</button>
             </div>
           </div>
 
@@ -567,6 +722,14 @@ export default function App() {
                style={{ fontSize: 'clamp(7px, 2.2vw, 10px)', textShadow: '0 0 12px #00F5FF' }}>
               WHERE GENIUS BECOMES POWER
             </p>
+            <div className="mt-3 flex justify-center">
+              <span
+                className="font-pixel tracking-widest px-3 py-1 border border-orange-400 text-orange-400"
+                style={{ fontSize: 'clamp(6px, 1.8vw, 8px)', background: 'rgba(255,140,0,0.1)', boxShadow: '0 0 12px rgba(255,140,0,0.4)', animation: 'blink 2s step-end infinite' }}
+              >
+                ● NOW IN BETA TESTING
+              </span>
+            </div>
           </div>
 
           {/* ── CTA BUTTONS ── */}
@@ -650,7 +813,7 @@ export default function App() {
               GAME STATS
             </p>
             <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3">
-              {[['6', 'SCIENTISTS'], ['8', 'ARENAS'], ['2P', 'VS MODE'], ['60', 'FPS'], ['LAN', 'MULTIPLAYER']].map(([val, label]) => (
+              {[['6', 'SCIENTISTS'], ['6', 'ARENAS'], ['2P', 'VS MODE'], ['60', 'FPS'], ['LAN', 'MULTIPLAYER']].map(([val, label]) => (
                 <div key={label} className="border border-cyan-400/20 bg-cyan-400/5 p-2 sm:p-3 text-center">
                   <span className="font-pixel text-yellow-400 text-base sm:text-lg block"
                         style={{ textShadow: '0 0 8px rgba(255,230,0,0.5)' }}>{val}</span>
@@ -723,6 +886,25 @@ export default function App() {
                 <span className="text-yellow-400">combat, strategy, and mastery of science itself.</span>
               </p>
             </Panel>
+
+            <Panel accent="#BF00FF">
+              <p className="font-pixel text-purple-500 tracking-widest mb-3"
+                 style={{ fontSize: 'clamp(6px, 1.5vw, 8px)', textShadow: '0 0 8px rgba(191,0,255,0.6)' }}>
+                WHY "MIND OVER MATTER"
+              </p>
+              <p className="font-vt text-lg sm:text-xl text-gray-300 leading-relaxed">
+                The name isn't just a title — it's the{' '}
+                <span className="text-purple-400">core philosophy</span> of the game.
+                In Mind Over Matter, raw strength alone will never be enough.
+                Every fight is won or lost in the mind first. Strategy, adaptability,
+                and the mastery of your scientist's knowledge are what separate a{' '}
+                <span className="text-yellow-400">champion from a contender</span>.
+                No matter how hard you hit, no matter how fast you move —{' '}
+                <span className="text-purple-400" style={{ textShadow: '0 0 10px rgba(191,0,255,0.7)' }}>
+                  the mind will always prevail.
+                </span>
+              </p>
+            </Panel>
           </div>
         </Section>
 
@@ -733,7 +915,7 @@ export default function App() {
           </SectionTitle>
           <p className="font-pixel text-cyan-400 tracking-[2px] sm:tracking-[3px] text-center -mt-3 sm:-mt-4 mb-6 sm:mb-8"
              style={{ fontSize: 'clamp(6px, 1.8vw, 8px)', textShadow: '0 0 8px #00F5FF' }}>
-            6 GENIUSES · 1 ARENA · NO RULES
+            6 GENIUSES · 6 ARENAS · NO RULES
           </p>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
             {scientists.map(s => (
@@ -744,6 +926,97 @@ export default function App() {
              style={{ fontSize: '8px', animation: 'blink 1.5s step-end infinite' }}>
             MORE SCIENTISTS UNLOCKABLE IN STORY MODE
           </p>
+        </Section>
+
+        {/* ══════════════ HOW TO PLAY ══════════════ */}
+        <Section id="howtoplay">
+          <SectionTitle color="text-cyan-400" accent="#00F5FF">
+            ◈ HOW TO PLAY ◈
+          </SectionTitle>
+
+          {[
+            {
+              label: 'CHARACTER SELECT',
+              img: htpCharSelect,
+              desc: 'Choose your scientist from the roster. Each fighter has unique stats, a signature Special move, and a devastating Ultimate.',
+              accent: '#FFE600',
+              accentClass: 'text-yellow-400',
+            },
+            {
+              label: 'MOVEMENT',
+              img: htpMovement,
+              desc: 'Use the D-Pad to move left and right. Press D-Pad Up to jump. Hold D-Pad Down to crouch and block low attacks.',
+              accent: '#39FF14',
+              accentClass: 'text-green-400',
+            },
+            {
+              label: 'ATTACKS',
+              img: htpAttacks,
+              desc: 'Tap action buttons to perform light and heavy attacks. Chain them together for devastating combos.',
+              accent: '#FF2D55',
+              accentClass: 'text-rose-500',
+            },
+            {
+              label: 'HEALTH BAR, INTELLIGENCE & ROUND',
+              img: htpHealthBar,
+              desc: 'Your health bar depletes as you take damage. The intelligence meter charges your Special and Ultimate. Win 2 rounds to claim victory.',
+              accent: '#00F5FF',
+              accentClass: 'text-cyan-400',
+            },
+            {
+              label: 'MAP SELECTION',
+              img: htpMapSelection,
+              desc: 'Pick your battlefield before each match. Each arena has its own atmosphere and hazards.',
+              accent: '#BF00FF',
+              accentClass: 'text-purple-500',
+            },
+            {
+              label: 'MULTIPLAYER',
+              img: htpMultiplayer,
+              desc: 'Challenge a friend over LAN — connect on the same network and battle head-to-head with low latency.',
+              accent: '#FF8C00',
+              accentClass: 'text-orange-500',
+            },
+            {
+              label: 'TRAINING MODE',
+              img: htpTraining,
+              desc: 'Sharpen your skills in Training Mode. Practice combos, test specials, and learn each scientist\'s move set without the pressure of a live match.',
+              accent: '#39FF14',
+              accentClass: 'text-green-400',
+            },
+            {
+              label: 'SETTINGS',
+              img: htpSettings,
+              desc: 'Adjust audio, controls, and display options to match your play style.',
+              accent: '#00F5FF',
+              accentClass: 'text-cyan-400',
+            },
+            {
+              label: 'SETTINGS · ADVANCED',
+              img: htpSettings2,
+              desc: 'Fine-tune advanced options including button remapping and visual preferences.',
+              accent: '#FFE600',
+              accentClass: 'text-yellow-400',
+            },
+          ].map(({ label, img, desc, accent, accentClass }) => (
+            <div key={label} className="mb-4">
+              <Panel accent={accent}>
+                <p className={`font-pixel ${accentClass} tracking-widest mb-3`}
+                   style={{ fontSize: 'clamp(7px, 2vw, 9px)', textShadow: `0 0 8px ${accent}` }}>
+                  {label}
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 items-center">
+                  <div className="overflow-hidden border"
+                       style={{ borderColor: `${accent}40`, boxShadow: `0 0 16px ${accent}20` }}>
+                    <img src={img} alt={label} className="w-full h-full object-cover block" />
+                  </div>
+                  <p className="font-vt text-base sm:text-lg text-gray-300 leading-relaxed">
+                    {desc}
+                  </p>
+                </div>
+              </Panel>
+            </div>
+          ))}
         </Section>
 
         {/* ══════════════ SYSTEM REQUIREMENTS ══════════════ */}
@@ -811,13 +1084,15 @@ export default function App() {
                   Play locally over your network — connect via LAN for low-latency head-to-head matches.
                 </span>
               </div>
-              <div className="border border-orange-500/20 bg-orange-500/5 p-3 sm:p-4 relative overflow-hidden">
-                <div className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2">
+              <div className="border border-gray-700/40 bg-gray-900/40 p-3 sm:p-4 relative overflow-hidden opacity-50 cursor-not-allowed select-none">
+                <div className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 flex gap-1">
+                  <span className="font-pixel text-black bg-gray-500 px-1.5 py-[2px] sm:px-2"
+                        style={{ fontSize: 'clamp(5px, 1.3vw, 6px)' }}>NOT AVAILABLE</span>
                   <span className="font-pixel text-black bg-orange-500 px-1.5 py-[2px] sm:px-2"
                         style={{ fontSize: 'clamp(5px, 1.3vw, 6px)' }}>COMING SOON</span>
                 </div>
-                <span className="font-pixel text-orange-500 block mb-1" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>ONLINE · JOIN CODE</span>
-                <span className="font-vt text-gray-300 text-base sm:text-lg">
+                <span className="font-pixel text-gray-500 block mb-1" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>ONLINE · JOIN CODE</span>
+                <span className="font-vt text-gray-500 text-base sm:text-lg">
                   Internet multiplayer via join codes — share a code with friends to battle online from anywhere.
                 </span>
               </div>
@@ -845,6 +1120,14 @@ export default function App() {
           <SectionTitle color="text-yellow-400" accent="#FFE600">
             ▼ DOWNLOAD APK ▼
           </SectionTitle>
+          <div className="flex justify-center mb-4">
+            <span
+              className="font-pixel tracking-widest px-3 py-1 border border-orange-400 text-orange-400"
+              style={{ fontSize: 'clamp(6px, 1.8vw, 8px)', background: 'rgba(255,140,0,0.1)', boxShadow: '0 0 12px rgba(255,140,0,0.4)' }}
+            >
+              ● BETA — v1.0.0.5-BETA IS NOW AVAILABLE FOR TESTING
+            </span>
+          </div>
 
           {/* ── VERSION PICKER TABS ── */}
           <div className="flex gap-2 mb-4 justify-center flex-wrap">
@@ -888,11 +1171,21 @@ export default function App() {
             return (
               <Panel key={v.tag} accent="#FFE600" className="text-center mb-4">
                 {/* version badge */}
-                <div className="inline-block border border-yellow-400/30 bg-yellow-400/5 px-4 py-1 mb-6">
+                <div className="inline-block border border-yellow-400/30 bg-yellow-400/5 px-4 py-1 mb-4">
                   <span className="font-pixel text-yellow-400" style={{ fontSize: '9px' }}>
                     {v.tag} · ANDROID
                   </span>
                 </div>
+                {v.isBeta && (
+                  <div className="mb-6">
+                    <span
+                      className="font-pixel tracking-widest px-3 py-1 border border-orange-400 text-orange-400"
+                      style={{ fontSize: 'clamp(6px, 1.8vw, 8px)', background: 'rgba(255,140,0,0.1)', boxShadow: '0 0 10px rgba(255,140,0,0.35)' }}
+                    >
+                      ● BETA BUILD — MAY CONTAIN BUGS
+                    </span>
+                  </div>
+                )}
 
                 {/* download button */}
                 <div className="mb-6">
