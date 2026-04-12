@@ -138,8 +138,8 @@ const scientists = [
 ]
 
 const CAROUSEL_POSTERS = [
-  { img: gamePoster,          label: 'MIND OVER MATTER' },
-  { img: carouselGame,        label: 'OFFICIAL POSTER' },
+  { img: gamePoster,          label: 'OFFICIAL POSTER' },
+  { img: carouselGame,        label: 'NIKOLA TESLA' },
   { img: carouselEinstein,    label: 'ALBERT EINSTEIN' },
   { img: carouselNewton,      label: 'ISAAC NEWTON' },
   { img: carouselGalileo,     label: 'GALILEO GALILEI' },
@@ -259,8 +259,32 @@ const TEAM_MEMBERS = [
 
 // ─── SECTION WRAPPER ──────────────────────────────────────────────────────
 function Section({ id, children }) {
+  const [isVisible, setIsVisible] = useState(false)
+  const sectionRef = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting)
+      },
+      { threshold: 0.1 }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <section id={id} className="scroll-mt-20">
+    <section 
+      id={id} 
+      ref={sectionRef}
+      className={`scroll-mt-20 transition-all duration-1000 ease-out transform will-change-transform ${
+        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
+      }`}
+    >
       {children}
     </section>
   )
