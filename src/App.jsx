@@ -149,11 +149,24 @@ const CAROUSEL_POSTERS = [
 
 const VERSIONS = [
   {
-    tag: 'v1.0.0.5-BETA',
-    label: 'v1.0.0.5-BETA',
+    tag: 'v1.0.0.6-BETA',
+    label: 'v1.0.0.6-BETA',
     badge: 'LATEST',
     badgeColor: '#39FF14',
     isLatest: true,
+    isBeta: true,
+    downloadUrl: 'https://github.com/gabbyygab/mindOverMatterWp/releases/tag/v1.0.0.6-BETA',
+    changes: [
+      { type: 'NEW',   text: 'Beta testing release' },
+      { type: 'NEW',   text: 'Open beta — report bugs to the team' },
+    ],
+  },
+  {
+    tag: 'v1.0.0.5-BETA',
+    label: 'v1.0.0.5-BETA',
+    badge: 'BETA',
+    badgeColor: '#FFE600',
+    isLatest: false,
     isBeta: true,
     downloadUrl: 'https://github.com/gabbyygab/mindOverMatterWp/releases/tag/v1.0.0.5-BETA',
     changes: [
@@ -164,8 +177,8 @@ const VERSIONS = [
   {
     tag: 'v1.0.0.4',
     label: 'v1.0.0.4',
-    badge: null,
-    badgeColor: null,
+    badge: 'PRE-RELEASE',
+    badgeColor: '#FF8C00',
     isLatest: false,
     downloadUrl: 'https://github.com/gabbyygab/mindOverMatterWp/releases/tag/v1.0.0.4',
     changes: [
@@ -175,8 +188,8 @@ const VERSIONS = [
   {
     tag: 'v1.0.0.3',
     label: 'v1.0.0.3',
-    badge: null,
-    badgeColor: null,
+    badge: 'PRE-RELEASE',
+    badgeColor: '#FF8C00',
     isLatest: false,
     downloadUrl: 'https://github.com/gabbyygab/mindOverMatterWp/releases/tag/v1.0.0.3',
     changes: [
@@ -186,8 +199,8 @@ const VERSIONS = [
   {
     tag: 'v1.0.0.2',
     label: 'v1.0.0.2',
-    badge: null,
-    badgeColor: null,
+    badge: 'PRE-RELEASE',
+    badgeColor: '#FF8C00',
     isLatest: false,
     downloadUrl: 'https://github.com/gabbyygab/mindOverMatterWp/releases/tag/v1.0.0.2',
     changes: [
@@ -202,8 +215,8 @@ const VERSIONS = [
   {
     tag: 'v1.0.0.1',
     label: 'v1.0.0.1',
-    badge: 'INITIAL',
-    badgeColor: '#00F5FF',
+    badge: 'PRE-RELEASE',
+    badgeColor: '#FF8C00',
     isLatest: false,
     downloadUrl: 'https://github.com/gabbyygab/mindOverMatterWp/releases/tag/v1.0.0.1',
     changes: [
@@ -475,7 +488,7 @@ export default function App() {
   const [activeNav, setActiveNav] = useState('hero')
   const [menuOpen, setMenuOpen] = useState(false)
   const [selectedChar, setSelectedChar] = useState(null)
-  const [selectedVersion, setSelectedVersion] = useState('v1.0.0.5-BETA')
+  const [selectedVersion, setSelectedVersion] = useState('v1.0.0.6-BETA')
   const [carouselIdx, setCarouselIdx] = useState(0)
   const [cardTilts, setCardTilts] = useState(() => CAROUSEL_POSTERS.map(() => ({ x: 0, y: 0, shine: { x: 50, y: 50 } })))
   const cardRefs = useRef([])
