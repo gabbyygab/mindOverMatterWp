@@ -989,7 +989,7 @@ export default function App() {
             {
               label: 'ATTACKS',
               img: htpAttacks,
-              desc: 'Tap action buttons to perform light and heavy attacks. Chain them together for devastating combos.',
+              desc: 'Tap action buttons to perform light and heavy attacks. Chain them together for devastating combos. On-screen indicators will flash: Punch 1 = J, Punch 2 = K, Kick = N, and Block = M.',
               accent: '#FF2D55',
               accentClass: 'text-rose-500',
             },
@@ -1094,11 +1094,11 @@ export default function App() {
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
               {[
                 ['MOVE', 'D-Pad'],
-                ['ATTACK', 'Action Buttons'],
+                ['PUNCH', 'J & K'],
                 ['JUMP', 'D-Pad Up'],
                 ['CROUCH', 'D-Pad Down'],
-                ['SPECIAL', 'Signature Move Button'],
-                ['INTERACT', 'Hold Action Button'],
+                ['KICK', 'N'],
+                ['BLOCK', 'M'],
               ].map(([label, val]) => (
                 <div key={label} className="border border-rose-500/20 bg-rose-500/5 p-2 sm:p-3">
                   <span className="font-pixel text-rose-500 block mb-1" style={{ fontSize: 'clamp(6px, 1.5vw, 7px)' }}>{label}</span>
